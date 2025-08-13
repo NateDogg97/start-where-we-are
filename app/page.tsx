@@ -310,20 +310,17 @@ export default function Home() {
           {/* Progress Bar Component */}
           <div className="max-w-xl mx-auto">
             <ProgressBar 
-              label="Early Bird Tickets Sold"
+              label="Campaign Progress"
+              campaignId="449584"
+              // Fallback values if API fails
               currentValue={73}
               maxValue={100}
-              // Uncomment and add your API endpoint when ready
-              // apiEndpoint="/api/ticket-sales"
             />
           </div>
           
           <div className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              Only 27% of early bird tickets remaining
-            </p>
             <Button size="lg" className="px-8">
-              Secure Your Tickets Now
+              Support the Campaign
             </Button>
           </div>
         </div>
@@ -437,7 +434,7 @@ export default function Home() {
               height={500}
               width="100%"
               mode="place"
-              q="Boston Common, Boston, MA"
+              q="Bow Market, Somerville, MA"
             />
           </div>
           
