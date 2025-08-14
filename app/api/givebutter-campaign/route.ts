@@ -62,7 +62,6 @@ export async function GET(request: Request) {
       return res.json();
     })
     .then((response: any) => {
-      console.log('Givebutter API full response:', JSON.stringify(response, null, 2));
       
       // The response might be the data directly, not wrapped in a 'data' property
       const data = response.data || response;
@@ -120,11 +119,11 @@ export async function GET(request: Request) {
         campaign: {
           title: 'Start Where We Are Festival 2025',
           description: 'Support our community music festival',
-          amount_raised: 2150,
+          raised: 2150,
           goal: 3000,
-          supporters_count: 43,
+          donors: 43,
           url: '#',
-          end_date: null,
+          end_at: null,
         }
       });
     });

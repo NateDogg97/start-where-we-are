@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 export function Footer() {
@@ -6,7 +7,16 @@ export function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="font-bold mb-2">Start Where We Are Music Festival</h3>
+            <div className="mb-2">
+              <Image
+                src="/Logo_2x-100-nobg.png"
+                alt="Start Where We Are Festival Logo"
+                width={200}
+                height={50}
+                className="object-contain mb-4"
+              />
+              <h3 className="font-bold">Start Where We Are Festival 2025</h3>
+            </div>
             <p className="text-muted-foreground mb-4">Heal the planet through music</p>
             <div className="flex gap-4">
               <a href="https://www.instagram.com/startwherewearefestival/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
@@ -72,8 +82,9 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="pt-8 border-t border-border text-center text-muted-foreground">
-          <p>&copy; 2024 Start Where We Are Festival. All rights reserved.</p>
+        <div className="flex justify-between flex-wrap pt-8 border-t border-border text-muted-foreground">
+          <p>&copy; 2025 Start Where We Are Festival. All rights reserved.</p>
+          <a href="https://www.planetxdevs.com" target='_blank'>Designed and Developed by Planet X Devs</a>
         </div>
       </div>
     </footer>

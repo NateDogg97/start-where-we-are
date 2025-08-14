@@ -34,10 +34,8 @@ export function ProgressBar({
     try {
       // Use the custom endpoint if provided, otherwise use Give Butter endpoint
       const url = apiEndpoint || `/api/givebutter-campaign?id=${campaignId}`;
-      console.log('Fetching from URL:', url);
       
       const response = await fetch(url);
-      console.log('Response status:', response.status);
       
       if (!response.ok) {
         const errorText = await response.text();
@@ -46,7 +44,6 @@ export function ProgressBar({
       }
       
       const data = await response.json();
-      console.log('Campaign data received:', data);
       
       // Store campaign data for additional display if needed
       setCampaignData(data.campaign);

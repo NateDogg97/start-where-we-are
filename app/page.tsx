@@ -320,7 +320,9 @@ export default function Home() {
           
           <div className="space-y-4">
             <Button size="lg" className="px-8">
-              Support the Campaign
+              <a href="https://givebutter.com/swwafestival" target="_blank">
+                Support the Campaign
+              </a>
             </Button>
           </div>
         </div>
@@ -394,13 +396,6 @@ export default function Home() {
               participating in a movement that supports independent artists, fosters creativity, 
               and builds lasting connections within our community.
             </p>
-            
-            {/* CTA Button */}
-            <div className="pt-4">
-              <Button size="lg" variant="outline" className="px-8">
-                Learn Our Story
-              </Button>
-            </div>
           </div>
           
           {/* Image Side */}
@@ -415,7 +410,7 @@ export default function Home() {
       </section>
 
       {/* Location Section with Google Maps */}
-      <section className="py-24 px-6">
+      <section className="py-24 px-6" id="location">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
