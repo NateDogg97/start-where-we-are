@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { ProgressBar } from '@/components/progress-bar';
 import { Counter } from '@/components/counter';
 import { GoogleMapsEmbed } from '@next/third-parties/google';
+import { motion, useScroll, useTransform, useInView, Variants } from 'framer-motion';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -18,6 +19,7 @@ import 'swiper/css/virtual';
 export default function Home() {
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
+  const { scrollYProgress } = useScroll();
 
   const bands = [
     { id: 1, name: 'The Midnight Echo', genre: 'Indie Rock', src: '/Screen Shot 2025-08-10 at 5.13.45 PM.webp' },
@@ -99,13 +101,57 @@ export default function Home() {
     };
   }, []);
 
+  // Animation variants
+  const fadeInScale: Variants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
+  const staggerContainer: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const staggerItem: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" }
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-primary z-[100]"
+        style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
+      />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6 py-24 overflow-hidden">
         {/* Background Videos for Seamless Loop */}
-        <video
+        <motion.video
           ref={video1Ref}
           autoPlay
           muted
@@ -115,9 +161,9 @@ export default function Home() {
         >
           <source src="/videos/3177845-uhd_3840_2160_24fps.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
+        </motion.video>
         
-        <video
+        <motion.video
           ref={video2Ref}
           muted
           playsInline
@@ -126,57 +172,93 @@ export default function Home() {
         >
           <source src="/videos/3177845-uhd_3840_2160_24fps.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
+        </motion.video>
         
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/50" style={{ zIndex: 3 }} />
         
         {/* Content Overlay */}
-        <div className="relative z-10 max-w-7xl mx-auto text-center text-white" style={{ zIndex: 4 }}>
-          <h1 className="text-6xl md:text-8xl font-bold mb-6">
+        <motion.div 
+          className="relative z-10 max-w-7xl mx-auto text-center text-white" 
+          style={{ zIndex: 4 }}
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
+          <motion.h1 
+            className="text-6xl md:text-8xl font-bold mb-6"
+            variants={fadeInScale}
+          >
             Start Where We Are
-          </h1>
-          <p className="text-2xl md:text-3xl opacity-90 mb-4">
+          </motion.h1>
+          <motion.p 
+            className="text-2xl md:text-3xl opacity-90 mb-4"
+            variants={fadeUp}
+          >
             Music Festival 2025
-          </p>
-          <p className="text-xl md:text-2xl opacity-90 mb-8">
+          </motion.p>
+          <motion.p 
+            className="text-xl md:text-2xl opacity-90 mb-8"
+            variants={fadeUp}
+          >
             Boston, MA • October 15, 2025
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Button size="lg" className="px-8 text-lg bg-white text-black hover:bg-white/90">
-              Get Tickets
-            </Button>
-            <Button size="lg" variant="outline" className="px-8 text-lg border-white text-black hover:bg-white hover:text-black">
-              View Lineup
-            </Button>
-          </div>
-        </div>
+          </motion.p>
+          <motion.div 
+            className="flex gap-4 justify-center"
+            variants={fadeUp}
+          >
+            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
+              <Button size="lg" className="px-8 text-lg bg-white text-black hover:bg-white/90 hover:scale-105 transition-transform">
+                Get Tickets
+              </Button>
+            </motion.div>
+            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
+              <Button size="lg" variant="outline" className="px-8 text-lg border-white text-black hover:bg-white hover:text-black hover:scale-105 transition-transform">
+                View Lineup
+              </Button>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Bands Carousel Section */}
       <section id="lineup" className="py-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto mb-12">
+        <motion.div 
+          className="max-w-7xl mx-auto mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
             Featured Artists
           </h2>
           <p className="text-xl text-muted-foreground text-center">
             Experience incredible performances from these amazing bands
           </p>
-        </div>
+        </motion.div>
         
         <div className="relative max-w-7xl mx-auto px-6">
           {/* Custom Navigation Buttons */}
           <div className="flex gap-2 mb-4">
-            <button className="swiper-button-prev-custom w-10 h-10 rounded-full border border-border bg-background hover:bg-accent transition-colors flex items-center justify-center">
+            <motion.button 
+              className="swiper-button-prev-custom w-10 h-10 rounded-full border border-border bg-background hover:bg-accent transition-colors flex items-center justify-center"
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
-            </button>
-            <button className="swiper-button-next-custom w-10 h-10 rounded-full border border-border bg-background hover:bg-accent transition-colors flex items-center justify-center">
+            </motion.button>
+            <motion.button 
+              className="swiper-button-next-custom w-10 h-10 rounded-full border border-border bg-background hover:bg-accent transition-colors flex items-center justify-center"
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
-            </button>
+            </motion.button>
           </div>
           <Swiper
             modules={[Navigation, Autoplay, Virtual]}
@@ -212,25 +294,32 @@ export default function Home() {
           >
             {bands.map((band, index) => (
               <SwiperSlide key={band.id} virtualIndex={index}>
-                <Card className="overflow-hidden border-0 shadow-lg">
-                  <CardContent className="p-0">
-                    <div className="relative group cursor-pointer">
-                      {/* Placeholder 9:16 aspect ratio image */}
-                      <div className="aspect-[4/5] bg-gradient-to-br from-primary/20 to-primary/40 overflow-hidden">
-                        <img
-                          src={band.src}
-                          alt={band.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="overflow-hidden border-0 shadow-lg">
+                    <CardContent className="p-0">
+                      <div className="relative group cursor-pointer">
+                        {/* Placeholder 9:16 aspect ratio image */}
+                        <div className="aspect-[4/5] bg-gradient-to-br from-primary/20 to-primary/40 overflow-hidden">
+                          <img
+                            src={band.src}
+                            alt={band.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                        {/* Band Info Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
+                          <h3 className="text-2xl font-bold mb-1">{band.name}</h3>
+                          <p className="text-sm opacity-90">{band.genre}</p>
+                        </div>
                       </div>
-                      {/* Band Info Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                        <h3 className="text-2xl font-bold mb-1">{band.name}</h3>
-                        <p className="text-sm opacity-90">{band.genre}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -241,74 +330,108 @@ export default function Home() {
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Image Side */}
-          <div className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg overflow-hidden">
+          <motion.div 
+            className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+          >
             <img
               src="/CarlieFebo-17062.webp"
               alt="Festival Experience"
               className="w-full h-full object-cover"
             />
-          </div>
+          </motion.div>
           
           {/* Text Side */}
-          <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-bold">
+          <motion.div 
+            className="space-y-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold"
+              variants={staggerItem}
+            >
               Experience the Magic
-            </h2>
-            <p className="text-lg text-muted-foreground">
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-muted-foreground"
+              variants={staggerItem}
+            >
               Join us for three unforgettable days of music, art, and community in the heart of Boston.
-            </p>
+            </motion.p>
             
             {/* Bullet Points */}
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <svg className="w-6 h-6 text-primary mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Over 30 incredible artists across 3 stages</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <svg className="w-6 h-6 text-primary mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Local food vendors and craft beverages</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <svg className="w-6 h-6 text-primary mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Interactive art installations and workshops</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <svg className="w-6 h-6 text-primary mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <span>VIP experiences and backstage access available</span>
-              </li>
-            </ul>
+            <motion.ul 
+              className="space-y-3"
+              variants={staggerContainer}
+            >
+              {[
+                "Over 30 incredible artists across 3 stages",
+                "Local food vendors and craft beverages",
+                "Interactive art installations and workshops",
+                "VIP experiences and backstage access available"
+              ].map((item, index) => (
+                <motion.li 
+                  key={index}
+                  className="flex items-start gap-3"
+                  variants={staggerItem}
+                >
+                  <svg className="w-6 h-6 text-primary mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{item}</span>
+                </motion.li>
+              ))}
+            </motion.ul>
             
             {/* CTA Button */}
-            <div className="pt-4">
-              <Button size="lg" className="px-8">
-                Get Your Pass Now
-              </Button>
-            </div>
-          </div>
+            <motion.div 
+              className="pt-4"
+              variants={staggerItem}
+            >
+              <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
+                <Button size="lg" className="px-8 hover:scale-105 transition-transform">
+                  Get Your Pass Now
+                </Button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Progress Bar Section */}
       <section className="py-24 px-6 bg-accent/30">
-        <div className="max-w-3xl mx-auto text-center space-y-8">
-          <h2 className="text-4xl md:text-5xl font-bold">
+        <motion.div 
+          className="max-w-3xl mx-auto text-center space-y-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={staggerContainer}
+        >
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold"
+            variants={staggerItem}
+          >
             Limited Tickets Available
-          </h2>
-          <p className="text-lg text-muted-foreground">
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-muted-foreground"
+            variants={staggerItem}
+          >
             Don't miss out on Boston's premier music festival. Our early bird tickets are selling fast, 
             and once they're gone, regular pricing begins.
-          </p>
+          </motion.p>
           
           {/* Progress Bar Component */}
-          <div className="max-w-xl mx-auto">
+          <motion.div 
+            className="max-w-xl mx-auto"
+            variants={staggerItem}
+          >
             <ProgressBar 
               label="Campaign Progress"
               campaignId="449584"
@@ -316,19 +439,24 @@ export default function Home() {
               currentValue={73}
               maxValue={100}
             />
-          </div>
+          </motion.div>
           
-          <div className="space-y-4">
-            <Button size="lg" className="px-8">
-              <a href="https://givebutter.com/swwafestival" target="_blank">
-                Support the Campaign
-              </a>
-            </Button>
-          </div>
-        </div>
+          <motion.div 
+            className="space-y-4"
+            variants={staggerItem}
+          >
+            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
+              <Button size="lg" className="px-8 hover:scale-105 transition-transform">
+                <a href="https://givebutter.com/swwafestival" target="_blank">
+                  Support the Campaign
+                </a>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* Stats Section */}
+      {/* Stats Section - No animations as requested */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
@@ -361,9 +489,11 @@ export default function Home() {
           
           {/* CTA Button */}
           <div className="text-center">
-            <Button size="lg" className="px-8">
-              Join the Experience
-            </Button>
+            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
+              <Button size="lg" className="px-8 hover:scale-105 transition-transform">
+                Join the Experience
+              </Button>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -372,44 +502,68 @@ export default function Home() {
       <section className="py-24 px-6 bg-accent/20">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Side */}
-          <div className="space-y-6 order-2 lg:order-1">
-            <h2 className="text-4xl md:text-5xl font-bold">
+          <motion.div 
+            className="space-y-6 order-2 lg:order-1"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold"
+              variants={staggerItem}
+            >
               A Festival Built by the Community
-            </h2>
+            </motion.h2>
             
-            <p className="text-lg text-muted-foreground">
+            <motion.p 
+              className="text-lg text-muted-foreground"
+              variants={staggerItem}
+            >
               Start Where We Are isn't just another music festival – it's a celebration of Boston's 
               vibrant music scene and the community that makes it thrive. Born from a love of live 
               music and local culture, our festival brings together emerging artists and established 
               performers on one incredible weekend.
-            </p>
+            </motion.p>
             
-            <p className="text-lg text-muted-foreground">
+            <motion.p 
+              className="text-lg text-muted-foreground"
+              variants={staggerItem}
+            >
               Every year, we partner with local businesses, artists, and organizations to create 
               an experience that goes beyond the music. From food trucks featuring Boston's best 
               cuisine to art installations by local creators, every aspect of the festival reflects 
               the spirit of our city.
-            </p>
+            </motion.p>
             
-            <p className="text-lg text-muted-foreground">
+            <motion.p 
+              className="text-lg text-muted-foreground"
+              variants={staggerItem}
+            >
               When you attend Start Where We Are, you're not just watching performances – you're 
               participating in a movement that supports independent artists, fosters creativity, 
               and builds lasting connections within our community.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
           
           {/* Image Side */}
-          <div className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg overflow-hidden order-1 lg:order-2">
+          <motion.div 
+            className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg overflow-hidden order-1 lg:order-2"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+          >
             <img
               src="/Screen Shot 2025-08-10 at 5.13.32 PM.webp"
               alt="Community Festival"
               className="w-full h-full object-cover"
             />
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Location Section with Google Maps */}
+      {/* Location Section with Google Maps - No animations as requested */}
       <section className="py-24 px-6" id="location">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -494,21 +648,38 @@ export default function Home() {
         
         {/* Content Overlay */}
         <div className="relative z-10 flex items-center justify-center h-full px-6">
-          <div className="text-center text-white space-y-6 max-w-3xl">
-            <h2 className="text-4xl md:text-6xl font-bold">
+          <motion.div 
+            className="text-center text-white space-y-6 max-w-3xl"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={staggerContainer}
+          >
+            <motion.h2 
+              className="text-4xl md:text-6xl font-bold"
+              variants={fadeInScale}
+            >
               Follow Our Journey
-            </h2>
-            <p className="text-xl md:text-2xl opacity-90">
+            </motion.h2>
+            <motion.p 
+              className="text-xl md:text-2xl opacity-90"
+              variants={fadeUp}
+            >
               Get behind-the-scenes content, artist announcements, and exclusive updates on our Instagram page.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button size="lg" className="px-8 text-lg bg-white text-black hover:bg-white/90" asChild>
-                <a href="https://www.instagram.com/startwherewearefestival/" target="_blank" rel="noopener noreferrer">
-                  Follow Us on Instagram
-                </a>
-              </Button>
-            </div>
-          </div>
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
+              variants={fadeUp}
+            >
+              <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
+                <Button size="lg" className="px-8 text-lg bg-white text-black hover:bg-white/90 hover:scale-105 transition-transform" asChild>
+                  <a href="https://www.instagram.com/startwherewearefestival/" target="_blank" rel="noopener noreferrer">
+                    Follow Us on Instagram
+                  </a>
+                </Button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </div>

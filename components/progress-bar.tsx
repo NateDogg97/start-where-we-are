@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 interface ProgressBarProps {
   apiEndpoint?: string;
@@ -17,15 +19,31 @@ export function ProgressBar({
   label = "Tickets Sold",
   campaignId
 }: ProgressBarProps) {
-  const [progress, setProgress] = useState(currentValue);
+  const [progress, setProgress] = useState(0);
+  const [animatedProgress, setAnimatedProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const [campaignData, setCampaignData] = useState<any>(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
 
   useEffect(() => {
     if (apiEndpoint || campaignId) {
       fetchProgress();
+    } else {
+      setProgress(currentValue);
     }
   }, [apiEndpoint, campaignId]);
+
+  // Animate progress when in view
+  useEffect(() => {
+    if (isInView && progress > 0) {
+      // Animate from 0 to progress
+      const timer = setTimeout(() => {
+        setAnimatedProgress(progress);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView, progress]);
 
   const fetchProgress = async () => {
     if (!apiEndpoint && !campaignId) return;
@@ -63,7 +81,7 @@ export function ProgressBar({
     }
   };
 
-  const progressPercentage = Math.min(Math.max(progress, 0), 100);
+  const progressPercentage = Math.min(Math.max(animatedProgress, 0), 100);
 
   // Format currency for display
   const formatCurrency = (amount: number) => {
@@ -76,24 +94,41 @@ export function ProgressBar({
   };
 
   return (
-    <div className="w-full space-y-2">
-      <div className="flex justify-between text-sm">
+    <div className="w-full space-y-2" ref={ref}>
+      <motion.div 
+        className="flex justify-between text-sm"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <span className="text-muted-foreground">{label}</span>
-        <span className="font-semibold">
+        <motion.span 
+          className="font-semibold"
+          key={progressPercentage}
+          initial={{ scale: 1 }}
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 0.3 }}
+        >
           {loading ? (
             <span className="opacity-50">Loading...</span>
           ) : (
             `${Math.round(progressPercentage)}%`
           )}
-        </span>
-      </div>
+        </motion.span>
+      </motion.div>
       <div className="relative w-full h-4 bg-muted rounded-full overflow-hidden">
-        <div 
-          className="absolute top-0 left-0 h-full bg-primary transition-all duration-500 ease-out rounded-full"
-          style={{ width: `${progressPercentage}%` }}
+        <motion.div 
+          className="absolute top-0 left-0 h-full bg-primary rounded-full"
+          initial={{ width: 0 }}
+          animate={{ width: `${progressPercentage}%` }}
+          transition={{ 
+            duration: 1.5, 
+            ease: "easeOut",
+            delay: isInView ? 0.2 : 0
+          }}
         >
           {!loading && <div className="absolute inset-0 bg-white/20 animate-pulse" />}
-        </div>
+        </motion.div>
       </div>
       {campaignData && campaignData.amount_raised !== undefined && (
         <div className="flex justify-between text-xs text-muted-foreground pt-1">
