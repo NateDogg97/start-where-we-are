@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Virtual } from 'swiper/modules';
 import Image from 'next/image';
@@ -10,24 +10,97 @@ import { ProgressBar } from '@/components/progress-bar';
 import { Counter } from '@/components/counter';
 import { GoogleMapsEmbed } from '@next/third-parties/google';
 import { motion, useScroll, useTransform, useInView, Variants } from 'framer-motion';
+import { MailerLiteForm } from '@/components/MailerLiteForm';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import 'swiper/css/virtual';
 
+
+// Bow Market Slideshow Component
+function BowMarketSlideshow() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    { src: '/_EST1927.webp', alt: 'Cute pug in Bow Market' },
+    { src: '/_EST5180.webp', alt: 'Bird\'s eye view of musicians in Bow Market' },
+    { src: '/_EST8141.webp', alt: 'People sitting at dining tables with fireplaces in Bow Market' },
+    { src: '/Welcome-to-bow-market.webp', alt: 'A "Welcome to Bow Market" sign.' },
+    { src: '/CarlieFebo-5319+copy.webp', alt: 'A young couple laughing around a dining table fireplace at Bow Market.' },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 4000); // Change slide every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  return (
+    <motion.div
+      className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg overflow-hidden"
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Slides */}
+      {slides.map((slide, index) => (
+        <motion.img
+          key={index}
+          src={slide.src}
+          alt={slide.alt}
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: currentSlide === index ? 1 : 0 }}
+          transition={{ duration: 1 }}
+        />
+      ))}
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              currentSlide === index ? 'bg-white w-6' : 'bg-white/50'
+            }`}
+            onClick={() => setCurrentSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-colors"
+        onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+        aria-label="Previous slide"
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-colors"
+        onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+        aria-label="Next slide"
+      >
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </motion.div>
+  );
+}
+
 export default function Home() {
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
   const { scrollYProgress } = useScroll();
 
-  const bands = [
-    { id: 1, name: 'The Midnight Echo', genre: 'Indie Rock', src: '/Screen Shot 2025-08-10 at 5.13.45 PM.webp' },
-    { id: 2, name: 'Velvet Thunder', genre: 'Electronic', src: '/pexels-mralexphotography-33323757.webp' },
-    { id: 3, name: 'Harbor Lights', genre: 'Folk', src: '/pexels-khoa-vo-2347168-5288861.webp' },
-    { id: 4, name: 'Neon Dreams', genre: 'Synthwave', src: '/pexels-anderson-cavalera-862834-1865444.webp' },
-    { id: 5, name: 'The Wild Hearts', genre: 'Alternative', src: '/pexels-roudy-salameh-977555-2692080.webp' },
-  ];
 
   useEffect(() => {
     const video1 = video1Ref.current;
@@ -185,45 +258,45 @@ export default function Home() {
           animate="visible"
           variants={staggerContainer}
         >
-          <motion.h1 
+          <motion.h1
             className="text-6xl md:text-8xl font-bold mb-6"
             variants={fadeInScale}
           >
-            Start Where We Are
+            Can we Heal the Earth with music?
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-2xl md:text-3xl opacity-90 mb-4"
             variants={fadeUp}
           >
-            Music Festival 2025
+            Earth Music Festival 2025
           </motion.p>
-          <motion.p 
+          <motion.p
             className="text-xl md:text-2xl opacity-90 mb-8"
             variants={fadeUp}
           >
-            Boston, MA • October 15, 2025
+            Boston, MA • Thursday, November 13th, 2025
           </motion.p>
           <motion.div 
             className="flex gap-4 justify-center"
             variants={fadeUp}
           >
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" className="px-8 text-lg bg-white text-black hover:bg-white/90 hover:scale-105 transition-transform">
+              <Button size="lg" className="px-12 py-6 text-xl bg-white text-black hover:bg-white/90 hover:scale-105 transition-transform">
                 Get Tickets
               </Button>
             </motion.div>
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" variant="outline" className="px-8 text-lg border-white text-black hover:bg-white hover:text-black hover:scale-105 transition-transform">
-                View Lineup
+              <Button size="lg" variant="outline" className="px-12 py-6 text-xl border-white text-white bg-transparent hover:bg-white hover:text-black hover:scale-105 transition-transform">
+                Donate
               </Button>
             </motion.div>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Bands Carousel Section */}
+      {/* Artist Performer Signup Section */}
       <section id="lineup" className="py-24 overflow-hidden">
-        <motion.div 
+        <motion.div
           className="max-w-7xl mx-auto mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -231,17 +304,27 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            Featured Artists
+            Calling Musicians to Apply to Perform at 2025 Festival
           </h2>
-          <p className="text-xl text-muted-foreground text-center">
-            Experience incredible performances from these amazing bands
+          <p className="text-xl text-muted-foreground text-center mb-8">
+            Join us as a performer at the Earth Music Festival 2025
           </p>
+          <div className="text-center mb-12">
+            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
+              <Button size="lg" className="px-8 py-4 text-lg hover:scale-105 transition-transform" asChild>
+                <a href="https://forms.gle/ejKncN8W28AyVsUC6" target="_blank" rel="noopener noreferrer">
+                  Apply to Perform
+                </a>
+              </Button>
+            </motion.div>
+          </div>
         </motion.div>
-        
+
+        {/* Musicians Carousel */}
         <div className="relative max-w-7xl mx-auto px-6">
           {/* Custom Navigation Buttons */}
           <div className="flex gap-2 mb-4">
-            <motion.button 
+            <motion.button
               className="swiper-button-prev-custom w-10 h-10 rounded-full border border-border bg-background hover:bg-accent transition-colors flex items-center justify-center"
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 400 }}
@@ -250,7 +333,7 @@ export default function Home() {
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
             </motion.button>
-            <motion.button 
+            <motion.button
               className="swiper-button-next-custom w-10 h-10 rounded-full border border-border bg-background hover:bg-accent transition-colors flex items-center justify-center"
               whileTap={{ scale: 0.9 }}
               transition={{ type: "spring", stiffness: 400 }}
@@ -260,8 +343,9 @@ export default function Home() {
               </svg>
             </motion.button>
           </div>
+
           <Swiper
-            modules={[Navigation, Autoplay, Virtual]}
+            modules={[Navigation, Virtual]}
             spaceBetween={20}
             slidesPerView={3}
             slidesPerGroup={1}
@@ -292,30 +376,59 @@ export default function Home() {
               },
             }}
           >
-            {bands.map((band, index) => (
-              <SwiperSlide key={band.id} virtualIndex={index}>
+            {/* Featured Musician */}
+            <SwiperSlide virtualIndex={0}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <Card className="overflow-hidden border-0 shadow-lg">
+                  <CardContent className="p-0">
+                    <div className="relative group cursor-pointer">
+                      <a href="https://canvasrebel.com/meet-sofia-villarreal/" target="_blank" rel="noopener noreferrer">
+                        <div className="aspect-[4/5] bg-gradient-to-br from-primary/20 to-primary/40 overflow-hidden">
+                          <img
+                            src="/Screen Shot 2025-08-10 at 5.13.45 PM.webp"
+                            alt="Sofia Villarreal"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
+                          <h3 className="text-2xl font-bold mb-1">Sofia Villarreal</h3>
+                          <p className="text-sm opacity-90">Festival Founder & Performer</p>
+                        </div>
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </SwiperSlide>
+
+            {/* Placeholder Cards */}
+            {[1, 2, 3, 4].map((index) => (
+              <SwiperSlide key={`placeholder-${index}`} virtualIndex={index}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <Card className="overflow-hidden border-0 shadow-lg">
+                  <Card className="overflow-hidden border-2 border-dashed border-primary/30 shadow-lg">
                     <CardContent className="p-0">
                       <div className="relative group cursor-pointer">
-                        {/* Placeholder 9:16 aspect ratio image */}
-                        <div className="aspect-[4/5] bg-gradient-to-br from-primary/20 to-primary/40 overflow-hidden">
-                          <img
-                            src={band.src}
-                            alt={band.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                        {/* Band Info Overlay */}
-                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                          <h3 className="text-2xl font-bold mb-1">{band.name}</h3>
-                          <p className="text-sm opacity-90">{band.genre}</p>
-                        </div>
+                        <a href="https://forms.gle/ejKncN8W28AyVsUC6" target="_blank" rel="noopener noreferrer">
+                          <div className="aspect-[4/5] bg-gradient-to-br from-primary/10 to-primary/20 overflow-hidden flex items-center justify-center">
+                            <div className="text-center p-6">
+                              <svg className="w-16 h-16 text-primary/50 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+                              </svg>
+                              <h3 className="text-xl font-bold text-primary mb-2">Apply to Fill This Slot</h3>
+                              <p className="text-sm text-muted-foreground">Join our lineup for 2025</p>
+                            </div>
+                          </div>
+                        </a>
                       </div>
                     </CardContent>
                   </Card>
@@ -326,71 +439,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Image Left, Text Right Section */}
+      {/* Experience the Magic - Bow Market Section */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image Side */}
-          <motion.div 
-            className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg overflow-hidden"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <img
-              src="/CarlieFebo-17062.webp"
-              alt="Festival Experience"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-          
+          {/* Image Slideshow Side */}
+          <BowMarketSlideshow />
+
           {/* Text Side */}
-          <motion.div 
+          <motion.div
             className="space-y-6"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={staggerContainer}
           >
-            <motion.h2 
+            <motion.h2
               className="text-4xl md:text-5xl font-bold"
               variants={staggerItem}
             >
               Experience the Magic
             </motion.h2>
-            <motion.p 
+            <motion.p
               className="text-lg text-muted-foreground"
               variants={staggerItem}
             >
-              Join us for three unforgettable days of music, art, and community in the heart of Boston.
+              Set in the heart of Bow Market, Somerville's courtyard of local food, art, and community.
             </motion.p>
-            
+            <motion.p
+              className="text-lg text-muted-foreground"
+              variants={staggerItem}
+            >
+              The heart of the festival is Upstairs at Bow, a cozy indoor space perfect for live music,
+              while the open courtyard below invites you to gather by the fire, grab a bite, or wander
+              through local shops between sets.
+            </motion.p>
+
             {/* Bullet Points */}
-            <motion.ul 
+            <motion.ul
               className="space-y-3"
               variants={staggerContainer}
             >
               {[
-                "Over 30 incredible artists across 3 stages",
-                "Local food vendors and craft beverages",
-                "Interactive art installations and workshops",
-                "VIP experiences and backstage access available"
+                "🎶 **Live performances** from local artists",
+                "🔥 **Courtyard fires** + cozy fall vibes",
+                "🌱 **Eco-friendly vendors** & climate organizations",
+                "🍴 **Food + drink** from Bow Market's award-winning businesses",
+                "🤝 **Ways to sign up**, connect & take climate action"
               ].map((item, index) => (
-                <motion.li 
+                <motion.li
                   key={index}
                   className="flex items-start gap-3"
                   variants={staggerItem}
                 >
-                  <svg className="w-6 h-6 text-primary mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>{item}</span>
+                  <span className="text-lg" dangerouslySetInnerHTML={{
+                    __html: item
+                      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                  }} />
                 </motion.li>
               ))}
             </motion.ul>
-            
+
             {/* CTA Button */}
-            <motion.div 
+            <motion.div
               className="pt-4"
               variants={staggerItem}
             >
@@ -413,18 +523,17 @@ export default function Home() {
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
         >
-          <motion.h2 
+          <motion.h2
             className="text-4xl md:text-5xl font-bold"
             variants={staggerItem}
           >
-            Limited Tickets Available
+            Help us meet our goal!
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="text-lg text-muted-foreground"
             variants={staggerItem}
           >
-            Don't miss out on Boston's premier music festival. Our early bird tickets are selling fast, 
-            and once they're gone, regular pricing begins.
+            As a grassroots, volunteer run organization, SWWA Festival donors are our lifeline to keeping our mission to serve Boston's artistic & sustainability community alive.
           </motion.p>
           
           {/* Progress Bar Component */}
@@ -446,9 +555,9 @@ export default function Home() {
             variants={staggerItem}
           >
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" className="px-8 hover:scale-105 transition-transform">
-                <a href="https://givebutter.com/swwafestival" target="_blank">
-                  Support the Campaign
+              <Button size="lg" className="px-8 hover:scale-105 transition-transform" asChild>
+                <a href="https://givebutter.com/swwafestival" target="_blank" rel="noopener noreferrer">
+                  Donate Here!
                 </a>
               </Button>
             </motion.div>
@@ -460,30 +569,42 @@ export default function Home() {
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            2023 Success
+            SWWA 2023
           </h2>
-          
+
           {/* Stats Grid */}
           <div className="max-w-[600px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="text-center space-y-2">
+              {/* People Icon */}
+              <svg className="w-12 h-12 text-primary mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
               <div className="text-5xl md:text-6xl font-bold text-primary">
                 <Counter to={250} suffix="+" duration={2.5} />
               </div>
-              <p className="text-lg text-muted-foreground">People Attended</p>
+              <p className="text-lg text-muted-foreground">Attendees</p>
             </div>
-            
+
             <div className="text-center space-y-2">
-              <div className="text-5xl md:text-6xl font-bold text-primary">
-                <Counter to={6} duration={1.5} />
-              </div>
-              <p className="text-lg text-muted-foreground">Amazing Bands</p>
-            </div>
-            
-            <div className="text-center space-y-2">
+              {/* Music Icon */}
+              <svg className="w-12 h-12 text-primary mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+              </svg>
               <div className="text-5xl md:text-6xl font-bold text-primary">
                 <Counter to={80} suffix="+" duration={2} />
               </div>
-              <p className="text-lg text-muted-foreground">Talented Musicians</p>
+              <p className="text-lg text-muted-foreground">Musicians</p>
+            </div>
+
+            <div className="text-center space-y-2">
+              {/* Leaf/Eco Icon */}
+              <svg className="w-12 h-12 text-primary mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+              <div className="text-5xl md:text-6xl font-bold text-primary">
+                <Counter to={4} suffix="+" duration={1.5} />
+              </div>
+              <p className="text-lg text-muted-foreground">Eco Collaborations</p>
             </div>
           </div>
           
@@ -568,11 +689,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Find Us in Boston
+              Find Us in Somerville
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The festival takes place at Boston Common, right in the heart of the city. 
-              Easy access via public transportation and plenty of nearby parking options.
+              The festival takes place at Upstairs at Bow in Bow Market, Somerville.
+              Easy access via public transportation and nearby parking options. Indoor venue - rain or shine!
             </p>
           </div>
           
@@ -583,7 +704,7 @@ export default function Home() {
               height={500}
               width="100%"
               mode="place"
-              q="Bow Market, Somerville, MA"
+              q="1 Bow Mkt Wy, Somerville, MA 02143"
             />
           </div>
           
@@ -596,9 +717,9 @@ export default function Home() {
               </svg>
               <h3 className="text-xl font-semibold mb-2">Venue Location</h3>
               <p className="text-muted-foreground">
-                Boston Common<br />
-                139 Tremont St<br />
-                Boston, MA 02111
+                Upstairs at Bow - Bow Market<br />
+                1 Bow Mkt Wy<br />
+                Somerville, MA 02143
               </p>
             </div>
             
@@ -606,11 +727,12 @@ export default function Home() {
               <svg className="w-12 h-12 text-primary mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
-              <h3 className="text-xl font-semibold mb-2">Festival Dates</h3>
+              <h3 className="text-xl font-semibold mb-2">Festival Date & Time</h3>
               <p className="text-muted-foreground">
-                October 15-17, 2025<br />
-                Gates open at 2:00 PM daily<br />
-                Rain or shine
+                Thursday, November 13th, 2025<br />
+                5:00 PM - 10:00 PM<br />
+                Doors open at 4:00 PM<br />
+                Rain or Shine (Indoor Venue)
               </p>
             </div>
             
@@ -620,13 +742,44 @@ export default function Home() {
               </svg>
               <h3 className="text-xl font-semibold mb-2">Contact Info</h3>
               <p className="text-muted-foreground">
-                Email: info@swwafestival.com<br />
-                Phone: (617) 555-0123<br />
-                Available Mon-Fri 9AM-5PM EST
+                Email: startwherewearefestival@gmail.com
               </p>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Newsletter Signup Section */}
+      <section className="py-24 px-6 bg-muted/30">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            className="text-5xl md:text-6xl font-bold mb-6"
+            variants={staggerItem}
+          >
+            Stay in the Loop
+          </motion.h2>
+          <motion.p
+            className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto"
+            variants={staggerItem}
+          >
+            Get exclusive updates on performers, sustainability initiatives, and festival news delivered to your inbox.
+          </motion.p>
+
+          {/* MailerLite Newsletter Form */}
+          <motion.div
+            className="w-full"
+            variants={staggerItem}
+          >
+            {/* <div className="ml-embedded" data-form="rqgYda"></div> */}
+            <MailerLiteForm />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* CTA Banner Section */}

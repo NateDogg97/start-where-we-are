@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -37,13 +38,15 @@ export function Header() {
       <header className="fixed top-0 z-50 w-full px-6 py-4 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <nav className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Image
-              src="/Logo_2x-100-nobg.png"
-              alt="Start Where We Are Festival Logo"
-              width={150}
-              height={50}
-              className="object-contain transition-all duration-300"
-            />
+            <Link href="/" className="hover:opacity-80 transition-opacity">
+              <Image
+                src="/Logo_2x-100-nobg.png"
+                alt="Start Where We Are Festival Logo"
+                width={150}
+                height={50}
+                className="object-contain transition-all duration-300"
+              />
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
