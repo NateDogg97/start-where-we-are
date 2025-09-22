@@ -26,6 +26,13 @@ export default function RootLayout({
         {children}
         <Footer />
 
+        {/* GiveButter Widgets Script */}
+        <Script
+          async
+          src={`https://widgets.givebutter.com/latest.umd.cjs?acct=${process.env.NEXT_PUBLIC_GIVE_BUTTER_ACCOUNT_ID}&p=other`}
+          strategy="afterInteractive"
+        />
+
         {/* MailerLite Script */}
         <Script
           strategy="afterInteractive"

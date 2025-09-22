@@ -6,7 +6,7 @@ import { Navigation, Autoplay, Virtual } from 'swiper/modules';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ProgressBar } from '@/components/progress-bar';
+import { GiveButterButton } from '@/components/GiveButterButton';
 import { Counter } from '@/components/counter';
 import { GoogleMapsEmbed } from '@next/third-parties/google';
 import { motion, useScroll, useTransform, useInView, Variants } from 'framer-motion';
@@ -259,7 +259,7 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h1
-            className="text-6xl md:text-8xl font-bold mb-6"
+            className="text-6xl md:text-8xl mb-6"
             variants={fadeInScale}
           >
             Can we Heal the Earth with music?
@@ -308,7 +308,7 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold"
+            className="text-4xl md:text-5xl"
             variants={staggerItem}
           >
             Help us meet our goal!
@@ -320,31 +320,17 @@ export default function Home() {
             As a grassroots, volunteer run organization, SWWA Festival donors are our lifeline to keeping our mission to serve Boston's artistic & sustainability community alive.
           </motion.p>
 
-          {/* Progress Bar Component */}
+          {/* GiveButter Donation Button */}
           <motion.div
-            className="max-w-xl mx-auto"
             variants={staggerItem}
+            className="flex flex-col sm:flex-row items-center gap-4 max-w-4xl mx-auto"
           >
-            <ProgressBar
-              label="Campaign Progress"
-              campaignId="449584"
-              // Fallback values if API fails
-              currentValue={73}
-              maxValue={100}
-            />
-          </motion.div>
-
-          <motion.div
-            className="space-y-4"
-            variants={staggerItem}
-          >
-            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" className="px-8 hover:scale-105 transition-transform text-lg" asChild>
-                <a href="https://givebutter.com/swwafestival" target="_blank" rel="noopener noreferrer">
-                  Donate Here!
-                </a>
-              </Button>
-            </motion.div>
+            <div className="flex-1 w-full sm:w-auto">
+              <givebutter-widget id="paK7zL"></givebutter-widget>
+            </div>
+            <div className="flex-shrink-0">
+              <givebutter-widget id="pda12j"></givebutter-widget>
+            </div>
           </motion.div>
         </motion.div>
       </section>
@@ -358,7 +344,7 @@ export default function Home() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
+          <h2 className="text-4xl md:text-5xl text-center mb-4">
             Calling Musicians to Apply to Perform at 2025 Festival
           </h2>
           <p className="text-xl text-muted-foreground text-center mb-8">
@@ -451,7 +437,7 @@ export default function Home() {
                           />
                         </div>
                         <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                          <h3 className="text-2xl font-bold mb-1">Sofia Villarreal</h3>
+                          <h3 className="text-2xl mb-1">Sofia Villarreal</h3>
                           <p className="text-sm opacity-90">Festival Founder & Performer</p>
                         </div>
                       </a>
@@ -479,7 +465,7 @@ export default function Home() {
                               <svg className="w-16 h-16 text-primary/50 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
                               </svg>
-                              <h3 className="text-xl font-bold text-primary mb-2">Apply to Fill This Slot</h3>
+                              <h3 className="text-xl text-primary mb-2">Apply to Fill This Slot</h3>
                               <p className="text-sm text-muted-foreground">Join our lineup for 2025</p>
                             </div>
                           </div>
@@ -509,7 +495,7 @@ export default function Home() {
             variants={staggerContainer}
           >
             <motion.h2
-              className="text-4xl md:text-5xl font-bold"
+              className="text-4xl md:text-5xl"
               variants={staggerItem}
             >
               Experience the Magic
@@ -590,7 +576,7 @@ export default function Home() {
             variants={staggerContainer}
           >
             <motion.h2
-              className="text-4xl md:text-5xl font-bold"
+              className="text-4xl md:text-5xl"
               variants={staggerItem}
             >
               A Festival Built by the Community
@@ -653,7 +639,7 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-5xl md:text-6xl font-bold mb-6"
+            className="text-5xl md:text-6xl mb-6"
             variants={staggerItem}
           >
             Stay in the Loop
@@ -679,7 +665,7 @@ export default function Home() {
       {/* Stats Section - No animations as requested */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+          <h2 className="text-4xl md:text-5xl text-center mb-16">
             SWWA 2023
           </h2>
 
@@ -734,7 +720,7 @@ export default function Home() {
       <section className="py-24 px-6" id="location">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl mb-4">
               Find Us in Somerville
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -830,7 +816,7 @@ export default function Home() {
             variants={staggerContainer}
           >
             <motion.h2 
-              className="text-4xl md:text-6xl font-bold"
+              className="text-4xl md:text-6xl"
               variants={fadeInScale}
             >
               Follow Our Journey

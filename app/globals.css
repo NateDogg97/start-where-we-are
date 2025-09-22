@@ -110,13 +110,41 @@
   --sidebar-ring: oklch(0.6 0.1 60);
 }
 
+/* Custom Font Declaration */
+@font-face {
+  font-family: 'Brugty';
+  src: url('/fonts/brugty/Brugty DEMO.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
+  :root {
+    /* CUSTOM FONT TOGGLE - To revert, comment the active lines and uncomment the disabled lines */
+
+    /* Active: Brugty font with weight 400 */
+    --heading-font: 'Brugty', serif;
+    --heading-weight: 400;
+
+    /* Disabled: Default font with bold weight (uncomment these and comment above to revert) */
+    /* --heading-font: inherit; */
+    /* --heading-weight: 700; */
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
     font-family: "mrs-eaves", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  }
+
+  /* Apply custom font to all headers using CSS variable */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: var(--heading-weight);
+    letter-spacing: 0.02em;
   }
 }
 

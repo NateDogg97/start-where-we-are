@@ -48,7 +48,7 @@ export default function PressPage() {
           animate="visible"
           variants={fadeIn}
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <h1 className="text-5xl md:text-6xl mb-6">
             Press & Media
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -84,7 +84,7 @@ export default function PressPage() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-2xl font-bold mb-4">
+                    <h3 className="text-2xl mb-4">
                       {article.title}
                     </h3>
 
@@ -113,7 +113,7 @@ export default function PressPage() {
             className="mt-16 text-center p-8 bg-accent/30 rounded-lg"
             variants={fadeIn}
           >
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-3xl mb-4">
               Want to Cover Our Story?
             </h2>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">

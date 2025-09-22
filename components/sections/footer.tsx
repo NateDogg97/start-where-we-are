@@ -18,7 +18,7 @@ export function Footer() {
                   className="object-contain mb-4"
                 />
               </Link>
-              <h3 className="font-bold text-lg">Start Where We Are Festival 2025</h3>
+              <h3 className="text-lg">Start Where We Are Festival 2025</h3>
             </div>
             <p className="text-muted-foreground mb-4 text-base">Heal the planet through music</p>
             <div className="flex gap-4">
@@ -45,7 +45,7 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="font-bold mb-4 text-lg">Learn More</h3>
+            <h3 className="mb-4 text-lg">Learn More</h3>
             <ul className="space-y-2 text-muted-foreground text-base">
               <li>
                 <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground text-base" asChild>
@@ -60,7 +60,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="font-bold mb-4 text-lg">Get Involved</h3>
+            <h3 className="mb-4 text-lg">Get Involved</h3>
             <ul className="space-y-2 text-muted-foreground text-base">
               <li>
                 <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground text-base" asChild>

@@ -142,7 +142,7 @@ export function MailerLiteForm() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h4 className="text-2xl font-bold mb-2">Welcome to the Community!</h4>
+                <h4 className="text-2xl mb-2">Welcome to the Community!</h4>
                 <p className="text-muted-foreground">You've successfully joined our festival newsletter. Get ready for exclusive updates!</p>
               </div>
             </div>
