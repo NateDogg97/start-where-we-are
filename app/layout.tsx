@@ -18,20 +18,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/vhz6nhr.css" />
-      </head>
-      <body
-        className="antialiased"
-      >
-        <Header />
-        {children}
-        <Footer />
-
-        {/* GiveButter Widgets Script */}
-        <Script
-          async
-          src={`https://widgets.givebutter.com/latest.umd.cjs?acct=${process.env.NEXT_PUBLIC_GIVE_BUTTER_ACCOUNT_ID}&p=other`}
-          strategy="afterInteractive"
-        />
 
         {/* MailerLite Script */}
         <Script
@@ -46,6 +32,21 @@ export default function RootLayout({
             `
           }}
         />
+
+        {/* GiveButter Widgets Script */}
+        <Script
+          async
+          src={`https://widgets.givebutter.com/latest.umd.cjs?acct=${process.env.NEXT_PUBLIC_GIVE_BUTTER_ACCOUNT_ID}&p=other`}
+          strategy="afterInteractive"
+        />
+
+      </head>
+      <body
+        className="antialiased"
+      >
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
