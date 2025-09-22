@@ -6,7 +6,6 @@ import { Navigation, Autoplay, Virtual } from 'swiper/modules';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { GiveButterButton } from '@/components/GiveButterButton';
 import { Counter } from '@/components/counter';
 import { GoogleMapsEmbed } from '@next/third-parties/google';
 import { motion, useScroll, useTransform, useInView, Variants } from 'framer-motion';
