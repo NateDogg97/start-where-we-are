@@ -792,7 +792,7 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/CarlieFebo-17040 (1).webp"
+            src="/CarlieFebo-17040.webp"
             alt="Festival Stage Background"
             fill
             className="object-cover"
