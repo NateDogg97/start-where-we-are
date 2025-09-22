@@ -282,12 +282,67 @@ export default function Home() {
           >
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
               <Button size="lg" className="px-12 py-6 text-xl bg-white text-black hover:bg-white/90 hover:scale-105 transition-transform">
-                Get Tickets
+                <a href="https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2025-tickets-1695978269659?aff=oddtdtcreator" target="_blank" rel="noopener noreferrer">
+                  Get Tickets
+                </a>
               </Button>
             </motion.div>
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
               <Button size="lg" variant="outline" className="px-12 py-6 text-xl border-white text-white bg-transparent hover:bg-white hover:text-black hover:scale-105 transition-transform">
-                Donate
+                <a href="https://givebutter.com/swwafestival" target="_blank" rel="noopener noreferrer">
+                  Donate
+                </a>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Progress Bar Section */}
+      <section className="py-24 px-6 bg-accent/30">
+        <motion.div
+          className="max-w-3xl mx-auto text-center space-y-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold"
+            variants={staggerItem}
+          >
+            Help us meet our goal!
+          </motion.h2>
+          <motion.p
+            className="text-lg text-muted-foreground"
+            variants={staggerItem}
+          >
+            As a grassroots, volunteer run organization, SWWA Festival donors are our lifeline to keeping our mission to serve Boston's artistic & sustainability community alive.
+          </motion.p>
+
+          {/* Progress Bar Component */}
+          <motion.div
+            className="max-w-xl mx-auto"
+            variants={staggerItem}
+          >
+            <ProgressBar
+              label="Campaign Progress"
+              campaignId="449584"
+              // Fallback values if API fails
+              currentValue={73}
+              maxValue={100}
+            />
+          </motion.div>
+
+          <motion.div
+            className="space-y-4"
+            variants={staggerItem}
+          >
+            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
+              <Button size="lg" className="px-8 hover:scale-105 transition-transform text-lg" asChild>
+                <a href="https://givebutter.com/swwafestival" target="_blank" rel="noopener noreferrer">
+                  Donate Here!
+                </a>
               </Button>
             </motion.div>
           </motion.div>
@@ -463,7 +518,16 @@ export default function Home() {
               className="text-lg text-muted-foreground"
               variants={staggerItem}
             >
-              Set in the heart of Bow Market, Somerville's courtyard of local food, art, and community.
+              Set in the heart of{' '}
+              <a
+                href="https://www.bowmarketsomerville.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline hover:text-primary/80 transition-colors"
+              >
+                Bow Market
+              </a>
+              , Somerville's courtyard of local food, art, and community.
             </motion.p>
             <motion.p
               className="text-lg text-muted-foreground"
@@ -505,7 +569,7 @@ export default function Home() {
               variants={staggerItem}
             >
               <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-                <Button size="lg" className="px-8 hover:scale-105 transition-transform">
+                <Button size="lg" className="px-8 text-lg hover:scale-105 transition-transform">
                   Get Your Pass Now
                 </Button>
               </motion.div>
@@ -514,53 +578,100 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Progress Bar Section */}
-      <section className="py-24 px-6 bg-accent/30">
-        <motion.div 
-          className="max-w-3xl mx-auto text-center space-y-8"
+      {/* Text Left, Image Right Section */}
+      <section className="py-24 px-6 bg-accent/20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Text Side */}
+          <motion.div
+            className="space-y-6 order-2 lg:order-1"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggerContainer}
+          >
+            <motion.h2
+              className="text-4xl md:text-5xl font-bold"
+              variants={staggerItem}
+            >
+              A Festival Built by the Community
+            </motion.h2>
+
+            <motion.p
+              className="text-lg text-muted-foreground"
+              variants={staggerItem}
+            >
+              Start Where We Are isn't just another music festival – it's a celebration of Boston's
+              vibrant music scene and the community that makes it thrive. Born from a love of live
+              music and local culture, our festival brings together emerging artists and established
+              performers on one incredible weekend.
+            </motion.p>
+
+            <motion.p
+              className="text-lg text-muted-foreground"
+              variants={staggerItem}
+            >
+              Every year, we partner with local businesses, artists, and organizations to create
+              an experience that goes beyond the music. From food trucks featuring Boston's best
+              cuisine to art installations by local creators, every aspect of the festival reflects
+              the spirit of our city.
+            </motion.p>
+
+            <motion.p
+              className="text-lg text-muted-foreground"
+              variants={staggerItem}
+            >
+              When you attend Start Where We Are, you're not just watching performances – you're
+              participating in a movement that supports independent artists, fosters creativity,
+              and builds lasting connections within our community.
+            </motion.p>
+          </motion.div>
+
+          {/* Image Side */}
+          <motion.div
+            className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg overflow-hidden order-1 lg:order-2"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+          >
+            <img
+              src="/Screen Shot 2025-08-10 at 5.13.32 PM.webp"
+              alt="Community Festival"
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Newsletter Signup Section */}
+      <section className="py-24 px-6 bg-muted/30">
+        <motion.div
+          className="max-w-4xl mx-auto text-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-4xl md:text-5xl font-bold"
+            className="text-5xl md:text-6xl font-bold mb-6"
             variants={staggerItem}
           >
-            Help us meet our goal!
+            Stay in the Loop
           </motion.h2>
           <motion.p
-            className="text-lg text-muted-foreground"
+            className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto"
             variants={staggerItem}
           >
-            As a grassroots, volunteer run organization, SWWA Festival donors are our lifeline to keeping our mission to serve Boston's artistic & sustainability community alive.
+            Get exclusive updates on performers, sustainability initiatives, and festival news delivered to your inbox.
           </motion.p>
-          
-          {/* Progress Bar Component */}
-          <motion.div 
-            className="max-w-xl mx-auto"
+
+          {/* MailerLite Newsletter Form */}
+          <motion.div
+            className="w-full"
             variants={staggerItem}
           >
-            <ProgressBar 
-              label="Campaign Progress"
-              campaignId="449584"
-              // Fallback values if API fails
-              currentValue={73}
-              maxValue={100}
-            />
-          </motion.div>
-          
-          <motion.div 
-            className="space-y-4"
-            variants={staggerItem}
-          >
-            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" className="px-8 hover:scale-105 transition-transform" asChild>
-                <a href="https://givebutter.com/swwafestival" target="_blank" rel="noopener noreferrer">
-                  Donate Here!
-                </a>
-              </Button>
-            </motion.div>
+            {/* <div className="ml-embedded" data-form="rqgYda"></div> */}
+            <MailerLiteForm />
           </motion.div>
         </motion.div>
       </section>
@@ -611,76 +722,11 @@ export default function Home() {
           {/* CTA Button */}
           <div className="text-center">
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" className="px-8 hover:scale-105 transition-transform">
+              <Button size="lg" className="px-8 hover:scale-105 transition-transform text-lg">
                 Join the Experience
               </Button>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Text Left, Image Right Section */}
-      <section className="py-24 px-6 bg-accent/20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Text Side */}
-          <motion.div 
-            className="space-y-6 order-2 lg:order-1"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggerContainer}
-          >
-            <motion.h2 
-              className="text-4xl md:text-5xl font-bold"
-              variants={staggerItem}
-            >
-              A Festival Built by the Community
-            </motion.h2>
-            
-            <motion.p 
-              className="text-lg text-muted-foreground"
-              variants={staggerItem}
-            >
-              Start Where We Are isn't just another music festival – it's a celebration of Boston's 
-              vibrant music scene and the community that makes it thrive. Born from a love of live 
-              music and local culture, our festival brings together emerging artists and established 
-              performers on one incredible weekend.
-            </motion.p>
-            
-            <motion.p 
-              className="text-lg text-muted-foreground"
-              variants={staggerItem}
-            >
-              Every year, we partner with local businesses, artists, and organizations to create 
-              an experience that goes beyond the music. From food trucks featuring Boston's best 
-              cuisine to art installations by local creators, every aspect of the festival reflects 
-              the spirit of our city.
-            </motion.p>
-            
-            <motion.p 
-              className="text-lg text-muted-foreground"
-              variants={staggerItem}
-            >
-              When you attend Start Where We Are, you're not just watching performances – you're 
-              participating in a movement that supports independent artists, fosters creativity, 
-              and builds lasting connections within our community.
-            </motion.p>
-          </motion.div>
-          
-          {/* Image Side */}
-          <motion.div 
-            className="relative aspect-[4/3] bg-gradient-to-br from-primary/20 to-primary/40 rounded-lg overflow-hidden order-1 lg:order-2"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <img
-              src="/Screen Shot 2025-08-10 at 5.13.32 PM.webp"
-              alt="Community Festival"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
         </div>
       </section>
 
@@ -692,8 +738,16 @@ export default function Home() {
               Find Us in Somerville
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              The festival takes place at Upstairs at Bow in Bow Market, Somerville.
-              Easy access via public transportation and nearby parking options. Indoor venue - rain or shine!
+              The festival takes place at Upstairs at Bow in{' '}
+              <a
+                href="https://www.bowmarketsomerville.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline hover:text-primary/80 transition-colors"
+              >
+                Bow Market, Somerville
+              </a>
+              . Easy access via public transportation and nearby parking options. Indoor venue - rain or shine!
             </p>
           </div>
           
@@ -747,39 +801,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Newsletter Signup Section */}
-      <section className="py-24 px-6 bg-muted/30">
-        <motion.div
-          className="max-w-4xl mx-auto text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={staggerContainer}
-        >
-          <motion.h2
-            className="text-5xl md:text-6xl font-bold mb-6"
-            variants={staggerItem}
-          >
-            Stay in the Loop
-          </motion.h2>
-          <motion.p
-            className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto"
-            variants={staggerItem}
-          >
-            Get exclusive updates on performers, sustainability initiatives, and festival news delivered to your inbox.
-          </motion.p>
-
-          {/* MailerLite Newsletter Form */}
-          <motion.div
-            className="w-full"
-            variants={staggerItem}
-          >
-            {/* <div className="ml-embedded" data-form="rqgYda"></div> */}
-            <MailerLiteForm />
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* CTA Banner Section */}

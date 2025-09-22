@@ -27,8 +27,8 @@ export function Header() {
   }, [isMobileMenuOpen]);
 
   const navItems = [
-    { href: '#lineup', label: 'Lineup' },
-    { href: '#tickets', label: 'Tickets' },
+    { href: '/#lineup', label: 'Lineup' },
+    { href: 'https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2025-tickets-1695978269659?aff=oddtdtcreator', label: 'Tickets' },
     { href: '#location', label: 'Location' },
     { href: 'https://givebutter.com/swwafestival', label: 'Donate', external: true },
   ];

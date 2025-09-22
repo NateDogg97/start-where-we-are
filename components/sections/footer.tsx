@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 export function Footer() {
@@ -8,16 +9,18 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="mb-2">
-              <Image
-                src="/Logo_2x-100-nobg.png"
-                alt="Start Where We Are Festival Logo"
-                width={200}
-                height={50}
-                className="object-contain mb-4"
-              />
-              <h3 className="font-bold">Start Where We Are Festival 2025</h3>
+              <Link href="/" className="inline-block hover:opacity-80 transition-opacity">
+                <Image
+                  src="/Logo_2x-100-nobg.png"
+                  alt="Start Where We Are Festival Logo"
+                  width={200}
+                  height={50}
+                  className="object-contain mb-4"
+                />
+              </Link>
+              <h3 className="font-bold text-lg">Start Where We Are Festival 2025</h3>
             </div>
-            <p className="text-muted-foreground mb-4">Heal the planet through music</p>
+            <p className="text-muted-foreground mb-4 text-base">Heal the planet through music</p>
             <div className="flex gap-4">
               <a href="https://www.instagram.com/startwherewearefestival/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -42,39 +45,39 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="font-bold mb-4">Learn More</h3>
-            <ul className="space-y-2 text-muted-foreground">
+            <h3 className="font-bold mb-4 text-lg">Learn More</h3>
+            <ul className="space-y-2 text-muted-foreground text-base">
               <li>
-                <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground" asChild>
+                <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground text-base" asChild>
                   <a href="#">About</a>
                 </Button>
               </li>
               <li>
-                <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground" asChild>
+                <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground text-base" asChild>
                   <a href="/press">Press</a>
                 </Button>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="font-bold mb-4">Get Involved</h3>
-            <ul className="space-y-2 text-muted-foreground">
+            <h3 className="font-bold mb-4 text-lg">Get Involved</h3>
+            <ul className="space-y-2 text-muted-foreground text-base">
               <li>
-                <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground" asChild>
+                <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground text-base" asChild>
                   <a href="https://givebutter.com/swwafestival" target="_blank" rel="noopener noreferrer">Donate</a>
                 </Button>
               </li>
               <li>
-                <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground" asChild>
+                <Button variant="link" className="p-0 h-auto text-muted-foreground hover:text-foreground text-base" asChild>
                   <a href="mailto:startwherewearefestival@gmail.com">Contact</a>
                 </Button>
               </li>
             </ul>
           </div>
         </div>
-        <div className="flex justify-between flex-wrap pt-8 border-t border-border text-muted-foreground">
+        <div className="flex justify-between flex-wrap pt-8 border-t border-border text-muted-foreground text-base">
           <p>&copy; 2025 Start Where We Are Festival. All rights reserved.</p>
-          <a href="https://www.planetxdevs.com" target='_blank'>Designed and Developed by Planet X Devs</a>
+          <a href="https://www.planetxdevs.com" target='_blank' className="hover:text-foreground transition-colors">Designed and Developed by Planet X Devs</a>
         </div>
       </div>
     </footer>
