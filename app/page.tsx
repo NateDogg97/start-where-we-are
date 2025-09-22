@@ -16,7 +16,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 import 'swiper/css/virtual';
 
-
 // Bow Market Slideshow Component
 function BowMarketSlideshow() {
   const [currentSlide, setCurrentSlide] = useState(0);
