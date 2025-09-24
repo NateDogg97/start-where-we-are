@@ -10,6 +10,7 @@ import { Counter } from '@/components/counter';
 import { GoogleMapsEmbed } from '@next/third-parties/google';
 import { motion, useScroll, useTransform, useInView, Variants } from 'framer-motion';
 import { MailerLiteForm } from '@/components/MailerLiteForm';
+import { SponsorsCarousel } from '@/components/sponsors-carousel';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -702,7 +703,7 @@ export default function Home() {
               <p className="text-lg text-muted-foreground">Eco Collaborations</p>
             </div>
           </div>
-          
+
           {/* CTA Button */}
           <div className="text-center">
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
@@ -713,6 +714,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Sponsors Carousel Section */}
+      <SponsorsCarousel />
 
       {/* Location Section with Google Maps - No animations as requested */}
       <section className="py-24 px-6" id="location">
