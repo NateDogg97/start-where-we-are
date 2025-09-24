@@ -91,6 +91,59 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Festival",
+              "name": "Start Where We Are Festival 2025",
+              "alternateName": "SWWA Festival",
+              "description": "Boston's premier music & sustainability festival combining live performances with environmental initiatives",
+              "startDate": "2025-11-13T17:00:00-05:00",
+              "endDate": "2025-11-13T22:00:00-05:00",
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "location": {
+                "@type": "Place",
+                "name": "Upstairs at Bow - Bow Market",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "1 Bow Mkt Wy",
+                  "addressLocality": "Somerville",
+                  "addressRegion": "MA",
+                  "postalCode": "02143",
+                  "addressCountry": "US"
+                }
+              },
+              "image": "https://www.swwafestival.com/Logo_2x-100-nobg.png",
+              "url": "https://www.swwafestival.com",
+              "performer": {
+                "@type": "MusicGroup",
+                "name": "Sofia Villarreal"
+              },
+              "organizer": {
+                "@type": "Organization",
+                "name": "Start Where We Are",
+                "url": "https://www.swwafestival.com",
+                "email": "startwherewearefestival@gmail.com",
+                "sameAs": [
+                  "https://www.instagram.com/startwherewearefestival/",
+                  "https://www.facebook.com/startwherewearefestival"
+                ]
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2025-tickets-1695978269659",
+                "availability": "https://schema.org/InStock",
+                "validFrom": "2024-09-01T00:00:00-05:00"
+              },
+              "keywords": "Boston music festival, Earth music festival, Bow Market events, Somerville festival, sustainable music festival, live music Boston"
+            })
+          }}
+        />
+
       </head>
       <body
         className="antialiased"
