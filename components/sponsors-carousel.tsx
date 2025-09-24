@@ -70,7 +70,7 @@ export function SponsorsCarousel() {
                 key={`${sponsor.alt}-${index}`}
                 className="flex-shrink-0 h-20 flex items-center justify-center"
               >
-                <div className="relative h-full w-40 grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+                <div className="relative h-full w-40 duration-300">
                   <Image
                     src={sponsor.src}
                     alt={sponsor.alt}
