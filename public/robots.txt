@@ -1,0 +1,9 @@
+# Robots.txt for swwafestival.com
+# Allow all web crawlers access to all content
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.swwafestival.com/sitemap.xml

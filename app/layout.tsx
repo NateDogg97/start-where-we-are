@@ -5,8 +5,59 @@ import { Footer } from "@/components/sections/footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Start Where We Are Festival 2025",
-  description: "Boston's premier music festival - October 15-17, 2025. Experience incredible performances, local art, and community.",
+  title: "Start Where We Are Festival 2025 | Earth Music Festival Boston",
+  description: "Boston's premier music & sustainability festival - November 13, 2025 at Bow Market. Live performances, eco initiatives, and community. Get tickets now!",
+  keywords: "Boston music festival, Earth music festival, Bow Market events, Somerville festival, sustainable music festival, live music Boston, SWWA Festival",
+  authors: [{ name: "Sofia Villarreal" }],
+  creator: "Planet X Devs",
+  publisher: "Start Where We Are",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://www.swwafestival.com'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "Start Where We Are Festival 2025 | Earth Music Festival Boston",
+    description: "Boston's premier music & sustainability festival - November 13, 2025 at Bow Market. Live performances, eco initiatives, and community.",
+    url: 'https://www.swwafestival.com',
+    siteName: 'Start Where We Are Festival',
+    images: [
+      {
+        url: '/Logo_2x-100-nobg.png',
+        width: 1200,
+        height: 630,
+        alt: 'Start Where We Are Festival 2025 Logo',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Start Where We Are Festival 2025 | Earth Music Festival Boston",
+    description: "Boston's premier music & sustainability festival - November 13, 2025 at Bow Market. Live performances, eco initiatives, and community.",
+    images: ['/Logo_2x-100-nobg.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: '',
+    yandex: '',
+    yahoo: '',
+  },
 };
 
 export default function RootLayout({
