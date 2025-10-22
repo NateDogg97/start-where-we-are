@@ -135,6 +135,8 @@ export default function RootLayout({
               },
               "offers": {
                 "@type": "Offer",
+                "price": "0.00",
+                "priceCurrency": "USD",
                 "url": "https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2025-tickets-1695978269659",
                 "availability": "https://schema.org/InStock",
                 "validFrom": "2024-09-01T00:00:00-05:00"
