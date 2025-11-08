@@ -18,7 +18,7 @@ export function Footer() {
                   className="object-contain mb-4"
                 />
               </Link>
-              <h3 className="text-lg">Start Where We Are Festival 2025</h3>
+              <h3 className="text-lg">Start Where We Are Festival 2026</h3>
             </div>
             <p className="text-muted-foreground mb-4 text-base">Heal the planet through music</p>
             <div className="flex gap-4">
@@ -76,7 +76,7 @@ export function Footer() {
           </div>
         </div>
         <div className="flex justify-between flex-wrap pt-8 border-t border-border text-muted-foreground text-base">
-          <p>&copy; 2025 Start Where We Are Festival. All rights reserved.</p>
+          <p>&copy; 2026 Start Where We Are Festival. All rights reserved.</p>
           <a href="https://www.planetxdevs.com" target='_blank' className="hover:text-foreground transition-colors">Designed and Developed by Planet X Devs</a>
         </div>
       </div>

@@ -267,13 +267,13 @@ export default function Home() {
             className="text-2xl md:text-3xl opacity-90 mb-4"
             variants={fadeUp}
           >
-            Earth Music Festival 2025
+            Spring / Summer 2026 — Date to be announced
           </motion.p>
           <motion.p
             className="text-xl md:text-2xl opacity-90 mb-8"
             variants={fadeUp}
           >
-            Boston, MA • Thursday, November 13th, 2025
+            The festival was originally set for November 13, 2025, but it's been rescheduled to a new date next spring/summer.
           </motion.p>
           <motion.div 
             className="flex gap-4 justify-center"
@@ -344,10 +344,10 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl text-center mb-4">
-            Calling Musicians to Apply to Perform at 2025 Festival
+            Calling Musicians to Apply to Perform at 2026 Festival
           </h2>
           <p className="text-xl text-muted-foreground text-center mb-8">
-            Join us as a performer at the Earth Music Festival 2025
+            Join us as a performer at the Earth Music Festival 2026
           </p>
           <div className="text-center mb-12">
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
@@ -465,7 +465,7 @@ export default function Home() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
                               </svg>
                               <h3 className="text-xl text-primary mb-2">Apply to Fill This Slot</h3>
-                              <p className="text-sm text-muted-foreground">Join our lineup for 2025</p>
+                              <p className="text-sm text-muted-foreground">Join our lineup for 2026</p>
                             </div>
                           </div>
                         </a>
@@ -771,9 +771,7 @@ export default function Home() {
               </svg>
               <h3 className="text-xl mb-2">Festival Date & Time</h3>
               <p className="text-muted-foreground">
-                Thursday, November 13th, 2025<br />
-                5:00 PM - 10:00 PM<br />
-                Doors open at 4:00 PM<br />
+                Spring/Summer 2026 — Date to be announced<br />
                 Rain or Shine (Indoor Venue)
               </p>
             </div>
