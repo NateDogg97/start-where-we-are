@@ -35,16 +35,33 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-surface-dark: var(--surface-dark);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Bump the smaller text sizes site-wide (one step up from Tailwind defaults). Headings are untouched. */
+@theme {
+  --text-xs: 0.875rem;
+  --text-xs--line-height: calc(1.25 / 0.875);
+  --text-sm: 1rem;
+  --text-sm--line-height: calc(1.5 / 1);
+  --text-base: 1.125rem;
+  --text-base--line-height: calc(1.75 / 1.125);
+  --text-lg: 1.25rem;
+  --text-lg--line-height: calc(1.75 / 1.25);
+  --text-xl: 1.375rem;
+  --text-xl--line-height: calc(1.875 / 1.375);
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(0.98 0.015 85);
   --foreground: oklch(0.25 0.04 75);
+  /* Dark section background: one shade lighter than --foreground (theme "black") */
+  --surface-dark: oklch(0.3 0.04 75);
   --card: oklch(0.96 0.02 85);
   --card-foreground: oklch(0.25 0.04 75);
   --popover: oklch(0.96 0.02 85);
@@ -79,6 +96,7 @@
 .dark {
   --background: oklch(0.18 0.02 75);
   --foreground: oklch(0.92 0.015 85);
+  --surface-dark: oklch(0.14 0.02 75);
   --card: oklch(0.22 0.025 75);
   --card-foreground: oklch(0.92 0.015 85);
   --popover: oklch(0.22 0.025 75);
@@ -137,6 +155,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
     font-family: "mrs-eaves", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   }
 
@@ -146,32 +166,4 @@
     font-weight: var(--heading-weight);
     letter-spacing: 0.02em;
   }
-}
-
-/* Custom Swiper Styles */
-.swiper-custom .swiper-button-next,
-.swiper-custom .swiper-button-prev {
-  display: none;
-}
-
-.swiper-button-prev-custom:disabled,
-.swiper-button-next-custom:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-/* Ensure smooth transitions in loop mode */
-.swiper-custom .swiper-wrapper {
-  transition-timing-function: ease-out;
-}
-
-/* All slides fully visible */
-.swiper-custom .swiper-slide {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-/* Container to show overflow */
-.swiper-custom {
-  overflow: visible !important;
 }

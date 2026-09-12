@@ -6,7 +6,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Start Where We Are Festival 2026 | Earth Music Festival Boston",
-  description: "Boston's premier music & sustainability festival - Spring/Summer 2026 at Bow Market. Live performances, eco initiatives, and community. Get tickets now!",
+  description: "Boston's premier music & sustainability festival - Wednesday, September 23, 2026 at Bow Market. Live performances, eco initiatives, and community. Get tickets now!",
   keywords: "Boston music festival, Earth music festival, Bow Market events, Somerville festival, sustainable music festival, live music Boston, SWWA Festival",
   authors: [{ name: "Sofia Villarreal" }],
   creator: "Planet X Devs",
@@ -22,12 +22,12 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Start Where We Are Festival 2026 | Earth Music Festival Boston",
-    description: "Boston's premier music & sustainability festival - Spring/Summer 2026 at Bow Market. Live performances, eco initiatives, and community.",
+    description: "Boston's premier music & sustainability festival - Wednesday, September 23, 2026 at Bow Market. Live performances, eco initiatives, and community.",
     url: 'https://www.swwafestival.com',
     siteName: 'Start Where We Are Festival',
     images: [
       {
-        url: '/Logo_2x-100-nobg.png',
+        url: '/2026-swwa-logo.png',
         width: 1200,
         height: 630,
         alt: 'Start Where We Are Festival 2026 Logo',
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Start Where We Are Festival 2026 | Earth Music Festival Boston",
-    description: "Boston's premier music & sustainability festival - Spring/Summer 2026 at Bow Market. Live performances, eco initiatives, and community.",
-    images: ['/Logo_2x-100-nobg.png'],
+    description: "Boston's premier music & sustainability festival - Wednesday, September 23, 2026 at Bow Market. Live performances, eco initiatives, and community.",
+    images: ['/2026-swwa-logo.png'],
   },
   robots: {
     index: true,
@@ -101,8 +101,8 @@ export default function RootLayout({
               "name": "Start Where We Are Festival 2026",
               "alternateName": "SWWA Festival",
               "description": "Boston's premier music & sustainability festival combining live performances with environmental initiatives",
-              "startDate": "2026-06-01T17:00:00-05:00",
-              "endDate": "2026-06-01T22:00:00-05:00",
+              "startDate": "2026-09-23T18:00:00-04:00",
+              "endDate": "2026-09-23T22:30:00-04:00",
               "eventStatus": "https://schema.org/EventScheduled",
               "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
               "location": {
@@ -117,7 +117,7 @@ export default function RootLayout({
                   "addressCountry": "US"
                 }
               },
-              "image": "https://www.swwafestival.com/Logo_2x-100-nobg.png",
+              "image": "https://www.swwafestival.com/2026-swwa-logo.png",
               "url": "https://www.swwafestival.com",
               "performer": {
                 "@type": "MusicGroup",
@@ -137,7 +137,7 @@ export default function RootLayout({
                 "@type": "Offer",
                 "price": "0.00",
                 "priceCurrency": "USD",
-                "url": "https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2025-tickets-1695978269659",
+                "url": "https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2026-tickets-1998927218119",
                 "availability": "https://schema.org/InStock",
                 "validFrom": "2024-09-01T00:00:00-05:00"
               },

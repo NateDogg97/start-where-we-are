@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: 'Start Where We Are Festival',
     images: [
       {
-        url: '/Logo_2x-100-nobg.png',
+        url: '/2026-swwa-logo.png',
         width: 1200,
         height: 630,
         alt: 'Start Where We Are Festival 2026 Logo',

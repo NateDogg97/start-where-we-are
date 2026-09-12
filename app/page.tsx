@@ -1,8 +1,6 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay, Virtual } from 'swiper/modules';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,11 +9,6 @@ import { GoogleMapsEmbed } from '@next/third-parties/google';
 import { motion, useScroll, useTransform, useInView, Variants } from 'framer-motion';
 import { MailerLiteForm } from '@/components/MailerLiteForm';
 import { SponsorsCarousel } from '@/components/sponsors-carousel';
-
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/autoplay';
-import 'swiper/css/virtual';
 
 // Bow Market Slideshow Component
 function BowMarketSlideshow() {
@@ -212,6 +205,15 @@ export default function Home() {
     }
   };
 
+  const artists = [
+    { name: 'SWWA Collective', href: 'https://sofiavillarrealmusic.com/', src: '/artists/swwa.jpg' },
+    { name: 'Dimitris Terpizis Quartet', href: 'https://dimitristerpizis.com/', src: '/artists/dimitris-terpizis-quartet.jpg' },
+    { name: 'Sofia Almeida & Yujin Han Duo', href: 'https://www.instagram.com/sofia.almeida.music/', src: '/artists/sofia-almedia-yujin-han.jpg' },
+    { name: 'Rita Valldeperas', href: 'https://ritavalldeperas.com/', src: '/artists/rita-valldeperas.jpg' },
+    { name: 'Jade Faria', href: 'https://www.jadefaria.com.br/', src: '/artists/jade-faria.jpg' },
+    { name: 'LAVAGXRL', href: 'https://www.instagram.com/lavagxrl/', src: '/artists/lavagxrl.jpg' },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Scroll Progress Bar */}
@@ -267,13 +269,13 @@ export default function Home() {
             className="text-2xl md:text-3xl opacity-90 mb-4"
             variants={fadeUp}
           >
-            Spring / Summer 2026 — Date to be announced
+            Join us Wednesday, September 23rd from 6–10:30 PM for live music, community, and a night dedicated to making a difference.
           </motion.p>
           <motion.p
             className="text-xl md:text-2xl opacity-90 mb-8"
             variants={fadeUp}
           >
-            The festival was originally set for November 13, 2025, but it's been rescheduled to a new date next spring/summer.
+            A benefit concert for environmental organizations
           </motion.p>
           <motion.div 
             className="flex gap-4 justify-center"
@@ -281,7 +283,7 @@ export default function Home() {
           >
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
               <Button size="lg" className="px-12 py-6 text-xl bg-white text-black hover:bg-white/90 hover:scale-105 transition-transform">
-                <a href="https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2025-tickets-1695978269659?aff=oddtdtcreator" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2026-tickets-1998927218119?aff=oddtdtcreator" target="_blank" rel="noopener noreferrer">
                   Get Tickets
                 </a>
               </Button>
@@ -316,7 +318,7 @@ export default function Home() {
             className="text-lg text-muted-foreground"
             variants={staggerItem}
           >
-            As a grassroots, volunteer run organization, SWWA Festival donors are our lifeline to keeping our mission to serve Boston's artistic & sustainability community alive.
+            Help us make this festival possible! Your donation supports the artists, people, and resources behind the event while helping us give back to environmental organizations making a positive impact.
           </motion.p>
 
           {/* GiveButter Donation Button */}
@@ -334,148 +336,57 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Artist Performer Signup Section */}
-      <section id="lineup" className="py-24 overflow-hidden">
-        <motion.div
-          className="max-w-7xl mx-auto mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl md:text-5xl text-center mb-4">
-            Calling Musicians to Apply to Perform at 2026 Festival
-          </h2>
-          <p className="text-xl text-muted-foreground text-center mb-8">
-            Join us as a performer at the Earth Music Festival 2026
-          </p>
-          <div className="text-center mb-12">
-            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" className="px-8 py-4 text-lg hover:scale-105 transition-transform" asChild>
-                <a href="https://forms.gle/ejKncN8W28AyVsUC6" target="_blank" rel="noopener noreferrer">
-                  Apply to Perform
-                </a>
-              </Button>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Musicians Carousel */}
-        <div className="relative max-w-7xl mx-auto px-6">
-          {/* Custom Navigation Buttons */}
-          <div className="flex gap-2 mb-4">
-            <motion.button
-              className="swiper-button-prev-custom w-10 h-10 rounded-full border border-border bg-background hover:bg-accent transition-colors flex items-center justify-center"
-              whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </motion.button>
-            <motion.button
-              className="swiper-button-next-custom w-10 h-10 rounded-full border border-border bg-background hover:bg-accent transition-colors flex items-center justify-center"
-              whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </motion.button>
-          </div>
-
-          <Swiper
-            modules={[Navigation, Virtual]}
-            spaceBetween={20}
-            slidesPerView={3}
-            slidesPerGroup={1}
-            loop={false}
-            virtual={{
-              enabled: true,
-              addSlidesBefore: 2,
-              addSlidesAfter: 2,
-            }}
-            centeredSlides={false}
-            navigation={{
-              prevEl: '.swiper-button-prev-custom',
-              nextEl: '.swiper-button-next-custom',
-            }}
-            className="swiper-custom"
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-              },
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 15,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-            }}
+      {/* Artists Section */}
+      <section id="lineup" className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
           >
-            {/* Featured Musician */}
-            <SwiperSlide virtualIndex={0}>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
+            <h2 className="text-4xl md:text-5xl mb-4">Artists</h2>
+            <p className="text-xl text-muted-foreground">
+              Meet the 2026 lineup
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={staggerContainer}
+          >
+            {artists.map((artist) => (
+              <motion.div key={artist.name} variants={staggerItem}>
                 <Card className="overflow-hidden border-0 shadow-lg">
                   <CardContent className="p-0">
-                    <div className="relative group cursor-pointer">
-                      <a href="https://canvasrebel.com/meet-sofia-villarreal/" target="_blank" rel="noopener noreferrer">
-                        <div className="aspect-[4/5] bg-gradient-to-br from-primary/20 to-primary/40 overflow-hidden">
-                          <img
-                            src="/Screen Shot 2025-08-10 at 5.13.45 PM.webp"
-                            alt="Sofia Villarreal"
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                          <h3 className="text-2xl mb-1">Sofia Villarreal</h3>
-                          <p className="text-sm opacity-90">Festival Founder & Performer</p>
-                        </div>
-                      </a>
-                    </div>
+                    <a
+                      href={artist.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative block group"
+                    >
+                      <div className="relative aspect-[4/5] bg-gradient-to-br from-primary/20 to-primary/40 overflow-hidden">
+                        <Image
+                          src={artist.src}
+                          alt={artist.name}
+                          fill
+                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
+                        <h3 className="text-2xl">{artist.name}</h3>
+                      </div>
+                    </a>
                   </CardContent>
                 </Card>
               </motion.div>
-            </SwiperSlide>
-
-            {/* Placeholder Cards */}
-            {[1, 2, 3, 4].map((index) => (
-              <SwiperSlide key={`placeholder-${index}`} virtualIndex={index}>
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Card className="overflow-hidden border-2 border-dashed border-primary/30 shadow-lg">
-                    <CardContent className="p-0">
-                      <div className="relative group cursor-pointer">
-                        <a href="https://forms.gle/ejKncN8W28AyVsUC6" target="_blank" rel="noopener noreferrer">
-                          <div className="aspect-[4/5] bg-gradient-to-br from-primary/10 to-primary/20 overflow-hidden flex items-center justify-center">
-                            <div className="text-center p-6">
-                              <svg className="w-16 h-16 text-primary/50 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
-                              </svg>
-                              <h3 className="text-xl text-primary mb-2">Apply to Fill This Slot</h3>
-                              <p className="text-sm text-muted-foreground">Join our lineup for 2026</p>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              </SwiperSlide>
             ))}
-          </Swiper>
+          </motion.div>
         </div>
       </section>
 
@@ -554,8 +465,10 @@ export default function Home() {
               variants={staggerItem}
             >
               <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-                <Button size="lg" className="px-8 text-lg hover:scale-105 transition-transform">
-                  Get Your Pass Now
+                <Button size="lg" className="px-8 text-lg hover:scale-105 transition-transform" asChild>
+                  <a href="https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2026-tickets-1998927218119?aff=oddtdtcreator" target="_blank" rel="noopener noreferrer">
+                    Get Your Pass Now
+                  </a>
                 </Button>
               </motion.div>
             </motion.div>
@@ -707,8 +620,10 @@ export default function Home() {
           {/* CTA Button */}
           <div className="text-center">
             <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" className="px-8 hover:scale-105 transition-transform text-lg">
-                Join the Experience
+              <Button size="lg" className="px-8 hover:scale-105 transition-transform text-lg" asChild>
+                <a href="https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2026-tickets-1998927218119?aff=oddtdtcreator" target="_blank" rel="noopener noreferrer">
+                  Join the Experience
+                </a>
               </Button>
             </motion.div>
           </div>
@@ -771,7 +686,7 @@ export default function Home() {
               </svg>
               <h3 className="text-xl mb-2">Festival Date & Time</h3>
               <p className="text-muted-foreground">
-                Spring/Summer 2026 — Date to be announced<br />
+                Wednesday, September 23rd from 6-10:30 PM<br />
                 Rain or Shine (Indoor Venue)
               </p>
             </div>
