@@ -299,43 +299,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Progress Bar Section */}
-      <section className="py-24 px-6 bg-accent/30">
-        <motion.div
-          className="max-w-3xl mx-auto text-center space-y-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={staggerContainer}
-        >
-          <motion.h2
-            className="text-4xl md:text-5xl"
-            variants={staggerItem}
-          >
-            Help us meet our goal!
-          </motion.h2>
-          <motion.p
-            className="text-lg text-muted-foreground"
-            variants={staggerItem}
-          >
-            Help us make this festival possible! Your donation supports the artists, people, and resources behind the event while helping us give back to environmental organizations making a positive impact.
-          </motion.p>
-
-          {/* GiveButter Donation Button */}
-          <motion.div
-            variants={staggerItem}
-            className="flex flex-col sm:flex-row items-center gap-4 max-w-4xl mx-auto"
-          >
-            <div className="flex-1 w-full sm:w-auto">
-              <givebutter-widget id="paK7zL"></givebutter-widget>
-            </div>
-            <div className="flex-shrink-0">
-              <givebutter-widget id="pda12j"></givebutter-widget>
-            </div>
-          </motion.div>
-        </motion.div>
-      </section>
-
       {/* Artists Section */}
       <section id="lineup" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
@@ -539,6 +502,43 @@ export default function Home() {
             />
           </motion.div>
         </div>
+      </section>
+
+      {/* Progress Bar Section */}
+      <section className="py-24 px-6 bg-accent/30">
+        <motion.div
+          className="max-w-3xl mx-auto text-center space-y-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            className="text-4xl md:text-5xl"
+            variants={staggerItem}
+          >
+            Help us meet our goal!
+          </motion.h2>
+          <motion.p
+            className="text-lg text-muted-foreground"
+            variants={staggerItem}
+          >
+            Help us make this festival possible! Your donation supports the artists, people, and resources behind the event while helping us give back to environmental organizations making a positive impact.
+          </motion.p>
+
+          {/* GiveButter Donation Button */}
+          <motion.div
+            variants={staggerItem}
+            className="flex flex-col sm:flex-row items-center gap-4 max-w-4xl mx-auto"
+          >
+            <div className="flex-1 w-full sm:w-auto">
+              <givebutter-widget id="paK7zL"></givebutter-widget>
+            </div>
+            <div className="flex-shrink-0">
+              <givebutter-widget id="pda12j"></givebutter-widget>
+            </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Newsletter Signup Section */}
