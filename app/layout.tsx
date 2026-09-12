@@ -2,45 +2,80 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Header } from "@/components/sections/header";
 import { Footer } from "@/components/sections/footer";
+import { siteGraph, EVENT } from "@/lib/structured-data";
 import "./globals.css";
 
+const TITLE = "Start Where We Are Earth Music Festival 2026 | Free Benefit Concert in Somerville, MA";
+const DESCRIPTION =
+  "Free, all-ages live music benefit concert for the environment — Wednesday, September 23, 2026, 6–10 PM at Bow Market in Somerville, minutes from Boston. Six local artists, courtyard fires, eco-friendly vendors, food & drink. Suggested $15 donation.";
+
 export const metadata: Metadata = {
-  title: "Start Where We Are Festival 2026 | Earth Music Festival Boston",
-  description: "Boston's premier music & sustainability festival - Wednesday, September 23, 2026 at Bow Market. Live performances, eco initiatives, and community. Get tickets now!",
-  keywords: "Boston music festival, Earth music festival, Bow Market events, Somerville festival, sustainable music festival, live music Boston, SWWA Festival",
-  authors: [{ name: "Sofia Villarreal" }],
+  title: {
+    default: TITLE,
+    template: "%s | Start Where We Are Festival",
+  },
+  description: DESCRIPTION,
+  applicationName: "Start Where We Are Festival",
+  category: "Music Festival",
+  classification: "Live Music Event, Benefit Concert, Sustainability Festival",
+  keywords: [
+    "things to do in Boston",
+    "things to do in Boston this week",
+    "things to do in Boston this weekend",
+    "free events in Boston",
+    "free things to do in Boston",
+    "Boston events September 2026",
+    "Somerville events",
+    "Union Square Somerville events",
+    "Bow Market events",
+    "Upstairs at Bow",
+    "live music Boston",
+    "live music Somerville",
+    "live music near me",
+    "Boston music festival",
+    "benefit concert Boston",
+    "environmental benefit concert",
+    "sustainability festival Boston",
+    "climate event Boston",
+    "eco festival Massachusetts",
+    "Earth music festival",
+    "Start Where We Are Festival",
+    "SWWA Festival",
+  ],
+  authors: [{ name: "Sofia Villarreal", url: "https://sofiavillarrealmusic.com/" }],
   creator: "Planet X Devs",
-  publisher: "Start Where We Are",
+  publisher: "Start Where We Are Festival",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.swwafestival.com'),
+  metadataBase: new URL("https://www.swwafestival.com"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
-    title: "Start Where We Are Festival 2026 | Earth Music Festival Boston",
-    description: "Boston's premier music & sustainability festival - Wednesday, September 23, 2026 at Bow Market. Live performances, eco initiatives, and community.",
-    url: 'https://www.swwafestival.com',
-    siteName: 'Start Where We Are Festival',
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "https://www.swwafestival.com",
+    siteName: "Start Where We Are Festival",
     images: [
       {
-        url: '/2026-swwa-logo.png',
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'Start Where We Are Festival 2026 Logo',
+        alt: "The courtyard at Bow Market in Somerville, MA, home of the Start Where We Are Festival",
       },
     ],
-    locale: 'en_US',
-    type: 'website',
+    locale: "en_US",
+    type: "website",
+    countryName: "United States",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: "Start Where We Are Festival 2026 | Earth Music Festival Boston",
-    description: "Boston's premier music & sustainability festival - Wednesday, September 23, 2026 at Bow Market. Live performances, eco initiatives, and community.",
-    images: ['/2026-swwa-logo.png'],
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -48,15 +83,25 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
-    google: '',
-    yandex: '',
-    yahoo: '',
+    google: "",
+    yandex: "",
+    yahoo: "",
+  },
+  // Non-standard tags that location-aware and event-aware crawlers still read.
+  other: {
+    "geo.region": "US-MA",
+    "geo.placename": "Somerville, Massachusetts",
+    "geo.position": "42.3813;-71.0980",
+    ICBM: "42.3813, -71.0980",
+    "event:start_time": EVENT.startDate,
+    "event:end_time": EVENT.endDate,
+    "event:location": "Upstairs at Bow, Bow Market, 1 Bow Market Way, Somerville, MA 02143",
   },
 };
 
@@ -91,59 +136,10 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
-        {/* Structured Data for SEO */}
+        {/* Structured data: organization, founder, website, venue and event (shared by every page) */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Festival",
-              "name": "Start Where We Are Festival 2026",
-              "alternateName": "SWWA Festival",
-              "description": "Boston's premier music & sustainability festival combining live performances with environmental initiatives",
-              "startDate": "2026-09-23T18:00:00-04:00",
-              "endDate": "2026-09-23T22:00:00-04:00",
-              "eventStatus": "https://schema.org/EventScheduled",
-              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-              "location": {
-                "@type": "Place",
-                "name": "Upstairs at Bow - Bow Market",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "1 Bow Mkt Wy",
-                  "addressLocality": "Somerville",
-                  "addressRegion": "MA",
-                  "postalCode": "02143",
-                  "addressCountry": "US"
-                }
-              },
-              "image": "https://www.swwafestival.com/2026-swwa-logo.png",
-              "url": "https://www.swwafestival.com",
-              "performer": {
-                "@type": "MusicGroup",
-                "name": "Sofia Villarreal"
-              },
-              "organizer": {
-                "@type": "Organization",
-                "name": "Start Where We Are",
-                "url": "https://www.swwafestival.com",
-                "email": "startwherewearefestival@gmail.com",
-                "sameAs": [
-                  "https://www.instagram.com/startwherewearefestival/",
-                  "https://www.facebook.com/startwherewearefestival"
-                ]
-              },
-              "offers": {
-                "@type": "Offer",
-                "price": "0.00",
-                "priceCurrency": "USD",
-                "url": "https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2026-tickets-1998927218119",
-                "availability": "https://schema.org/InStock",
-                "validFrom": "2024-09-01T00:00:00-05:00"
-              },
-              "keywords": "Boston music festival, Earth music festival, Bow Market events, Somerville festival, sustainable music festival, live music Boston"
-            })
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraph) }}
         />
 
       </head>
