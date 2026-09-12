@@ -269,7 +269,7 @@ export default function Home() {
             className="text-2xl md:text-3xl opacity-90 mb-4"
             variants={fadeUp}
           >
-            Join us Wednesday, September 23rd from 6–10:30 PM for live music, community, and a night dedicated to making a difference.
+            Join us Wednesday, September 23rd from 6–10:00 PM for live music, community, and a night dedicated to making a difference.
           </motion.p>
           <motion.p
             className="text-xl md:text-2xl opacity-90 mb-8"
@@ -686,7 +686,7 @@ export default function Home() {
               </svg>
               <h3 className="text-xl mb-2">Festival Date & Time</h3>
               <p className="text-muted-foreground">
-                Wednesday, September 23rd from 6-10:30 PM<br />
+                Wednesday, September 23rd from 6-10:00 PM<br />
                 Rain or Shine (Indoor Venue)
               </p>
             </div>

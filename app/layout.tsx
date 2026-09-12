@@ -102,7 +102,7 @@ export default function RootLayout({
               "alternateName": "SWWA Festival",
               "description": "Boston's premier music & sustainability festival combining live performances with environmental initiatives",
               "startDate": "2026-09-23T18:00:00-04:00",
-              "endDate": "2026-09-23T22:30:00-04:00",
+              "endDate": "2026-09-23T22:00:00-04:00",
               "eventStatus": "https://schema.org/EventScheduled",
               "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
               "location": {
