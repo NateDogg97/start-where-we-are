@@ -181,9 +181,9 @@ export function HomeClient() {
               className="font-condensed font-black uppercase tracking-wide text-festival-ink text-xl sm:text-2xl lg:text-[1.75rem] leading-tight space-y-0.5 mb-8"
               variants={fadeUp}
             >
-              <p>Bow Market</p>
+              <p className="text-white">Bow Market</p>
               <p>1 Bow Mkt Wy, Somerville, MA 02143</p>
-              <p>Wednesday, Sept 23, 2026</p>
+              <p className="text-white">Wednesday, Sept 23, 2026</p>
               <p>6PM&ndash;10PM</p>
             </motion.div>
 
