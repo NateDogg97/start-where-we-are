@@ -139,7 +139,7 @@ export function HomeClient() {
         style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
       />
 
-      {/* Hero Section - layout follows mock01.jpg */}
+      {/* Hero Section */}
       <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
         {/* Background Artwork */}
         <Image

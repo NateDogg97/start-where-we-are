@@ -16,7 +16,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
-  // On the home page the nav floats transparently over the hero artwork (see mock01.jpg).
+  // On the home page the nav floats transparently over the hero artwork.
   // Once the user scrolls, or on any other page, it becomes a solid pink bar with the logo.
   const isFloating = pathname === '/' && !isScrolled;
 
