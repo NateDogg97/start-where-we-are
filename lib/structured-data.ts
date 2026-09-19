@@ -19,7 +19,7 @@ export const EVENT = {
   donateUrl: 'https://givebutter.com/swwafestival',
   email: 'startwherewearefestival@gmail.com',
   ogImage: `${SITE_URL}/og-image.jpg`,
-  logo: `${SITE_URL}/2026-swwa-logo.png`,
+  logo: `${SITE_URL}/logo.png`,
 } as const;
 
 // Stable @ids so the same entity can be referenced from several pages.

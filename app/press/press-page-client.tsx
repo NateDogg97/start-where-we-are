@@ -48,7 +48,7 @@ export function PressPageClient() {
           animate="visible"
           variants={fadeIn}
         >
-          <h1 className="text-5xl md:text-6xl mb-6">
+          <h1 className="font-display text-5xl md:text-6xl mb-6">
             Press & Media
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">

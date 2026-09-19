@@ -113,7 +113,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="https://use.typekit.net/vhz6nhr.css" />
+        <link rel="stylesheet" href="https://use.typekit.net/ten4gig.css" />
 
         {/* MailerLite Script */}
         <Script

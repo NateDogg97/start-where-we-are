@@ -48,7 +48,7 @@ export function SponsorsCarousel() {
   }, []);
 
   return (
-    <section className="py-24 overflow-hidden bg-accent/10">
+    <section className="py-24 overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto px-6 mb-12">
         <h2 className="text-4xl md:text-5xl text-center mb-4">
           Our Sponsors & Partners

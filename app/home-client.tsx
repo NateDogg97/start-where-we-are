@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -90,82 +90,7 @@ function BowMarketSlideshow() {
 }
 
 export function HomeClient() {
-  const video1Ref = useRef<HTMLVideoElement>(null);
-  const video2Ref = useRef<HTMLVideoElement>(null);
   const { scrollYProgress } = useScroll();
-
-
-  useEffect(() => {
-    const video1 = video1Ref.current;
-    const video2 = video2Ref.current;
-
-    if (!video1 || !video2) return;
-
-    let activeVideo = video1;
-    let inactiveVideo = video2;
-    let isTransitioning = false;
-
-    // Initialize - video1 plays on top, video2 is below and paused
-    video1.style.opacity = '1';
-    video1.style.zIndex = '2';
-    video2.style.opacity = '1';
-    video2.style.zIndex = '1';
-    video2.pause();
-
-    const handleTimeUpdate = (event: Event) => {
-      const video = event.target as HTMLVideoElement;
-      
-      // Only handle timeupdate from the currently active video
-      if (video !== activeVideo || isTransitioning) return;
-
-      const currentTime = video.currentTime;
-      const duration = video.duration;
-      
-      // Start backup video playing 0.5 seconds before end (before fade starts)
-      if (duration - currentTime <= 0.5 && inactiveVideo.paused) {
-        // Start the backup video playing underneath
-        inactiveVideo.currentTime = 0;
-        inactiveVideo.play();
-      }
-      
-      // Start fade transition 0.3 seconds before end
-      if (duration - currentTime <= 0.3) {
-        isTransitioning = true;
-        
-        // Fade out current video over 300ms (backup is already playing)
-        activeVideo.style.opacity = '0';
-        
-        // Complete the transition after fade
-        setTimeout(() => {
-          // Swap z-index - make the now-playing video on top
-          inactiveVideo.style.zIndex = '2';
-          activeVideo.style.zIndex = '1';
-          
-          // Reset opacity for next transition
-          activeVideo.style.opacity = '1';
-          
-          // Reset inactive video to first frame and pause
-          activeVideo.currentTime = 0;
-          activeVideo.pause();
-          
-          // Swap references
-          [activeVideo, inactiveVideo] = [inactiveVideo, activeVideo];
-          
-          // Reset transition flag
-          isTransitioning = false;
-        }, 300);
-      }
-    };
-
-    // Add event listeners
-    video1.addEventListener('timeupdate', handleTimeUpdate);
-    video2.addEventListener('timeupdate', handleTimeUpdate);
-
-    return () => {
-      video1.removeEventListener('timeupdate', handleTimeUpdate);
-      video2.removeEventListener('timeupdate', handleTimeUpdate);
-    };
-  }, []);
 
   // Animation variants
   const fadeInScale: Variants = {
@@ -214,85 +139,80 @@ export function HomeClient() {
         style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
       />
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 py-24 overflow-hidden">
-        {/* Background Videos for Seamless Loop */}
-        <motion.video
-          ref={video1Ref}
-          autoPlay
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
-          style={{ zIndex: 1 }}
-        >
-          <source src="/videos/3177845-uhd_3840_2160_24fps.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </motion.video>
-        
-        <motion.video
-          ref={video2Ref}
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
-          style={{ zIndex: 2 }}
-        >
-          <source src="/videos/3177845-uhd_3840_2160_24fps.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </motion.video>
-        
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/50" style={{ zIndex: 3 }} />
-        
+      {/* Hero Section - layout follows mock01.jpg */}
+      <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
+        {/* Background Artwork */}
+        <Image
+          src="/hero01.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[62%_50%]"
+        />
+
         {/* Content Overlay */}
-        <motion.div 
-          className="relative z-10 max-w-7xl mx-auto text-center text-white" 
-          style={{ zIndex: 4 }}
+        <motion.div
+          className="relative z-10 flex-1 flex flex-col w-full max-w-7xl mx-auto px-6 pt-32 pb-16 md:pt-40 md:pb-20"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
         >
-          <motion.h1
-            className="text-6xl md:text-8xl mb-6"
-            variants={fadeInScale}
-          >
-            Can we Heal the Earth with music?
-          </motion.h1>
-          <motion.p
-            className="text-2xl md:text-3xl opacity-90 mb-4"
-            variants={fadeUp}
-          >
-            Join us Wednesday, September 23rd from 6–10:00 PM for live music, community, and a night dedicated to making a difference.
-          </motion.p>
-          <motion.p
-            className="text-xl md:text-2xl opacity-90 mb-8"
-            variants={fadeUp}
-          >
-            A benefit concert for environmental organizations
-          </motion.p>
-          <motion.div 
-            className="flex gap-4 justify-center"
-            variants={fadeUp}
-          >
-            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" className="px-12 py-6 text-xl bg-white text-black hover:bg-white/90 hover:scale-105 transition-transform">
-                <a href="https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2026-tickets-1998927218119?aff=oddtdtcreator" target="_blank" rel="noopener noreferrer">
-                  Get Tickets
-                </a>
-              </Button>
+          <div className="flex-1 flex flex-col justify-center max-w-xl lg:max-w-2xl">
+            <motion.h1 className="mb-6 md:mb-8" variants={fadeInScale}>
+              <Image
+                src="/logo.png"
+                alt="Start Where We Are Eco Music Festival 2026"
+                width={1033}
+                height={275}
+                priority
+                className="block w-full max-w-[20rem] sm:max-w-[26rem] lg:max-w-[34rem] h-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.15)]"
+              />
+            </motion.h1>
+
+            <motion.p
+              className="font-condensed font-black uppercase tracking-wide text-primary text-4xl sm:text-5xl leading-none mb-4"
+              variants={fadeUp}
+            >
+              Eco Music Festival 2026
+            </motion.p>
+
+            <motion.div
+              className="font-condensed font-black uppercase tracking-wide text-festival-ink text-xl sm:text-2xl lg:text-[1.75rem] leading-tight space-y-0.5 mb-8"
+              variants={fadeUp}
+            >
+              <p>Bow Market</p>
+              <p>1 Bow Mkt Wy, Somerville, MA 02143</p>
+              <p>Wednesday, Sept 23, 2026</p>
+              <p>6PM&ndash;10PM</p>
             </motion.div>
-            <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-              <Button size="lg" variant="outline" className="px-12 py-6 text-xl border-white text-white bg-transparent hover:bg-white hover:text-black hover:scale-105 transition-transform">
-                <a href="https://givebutter.com/swwafestival" target="_blank" rel="noopener noreferrer">
-                  Donate
-                </a>
-              </Button>
+
+            <motion.div className="flex" variants={fadeUp}>
+              <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
+                <Button
+                  size="lg"
+                  className="h-auto px-12 py-4 text-2xl rounded-lg bg-festival-mint text-festival-ink hover:bg-festival-mint/90 hover:scale-105 transition-transform shadow-lg"
+                  asChild
+                >
+                  <a href="https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2026-tickets-1998927218119?aff=oddtdtcreator" target="_blank" rel="noopener noreferrer">
+                    Get Tickets!
+                  </a>
+                </Button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
+
+          <motion.p
+            className="font-condensed font-black uppercase tracking-wide text-festival-mint text-xl sm:text-2xl lg:text-3xl leading-tight mt-12 lg:mt-0 lg:self-end lg:text-right max-w-3xl"
+            variants={fadeUp}
+          >
+            Benefit concert for environmental organizations
+          </motion.p>
         </motion.div>
       </section>
 
       {/* Artists Section */}
-      <section id="lineup" className="py-24 px-6">
+      <section id="lineup" className="py-24 px-6 scroll-mt-16">
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -301,7 +221,7 @@ export function HomeClient() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl mb-4">Artists</h2>
+            <h2 className="font-display text-4xl md:text-5xl mb-4">Artists</h2>
             <p className="text-xl text-muted-foreground">
               Meet the 2026 lineup
             </p>
@@ -432,7 +352,7 @@ export function HomeClient() {
       </section>
 
       {/* Text Left, Image Right Section */}
-      <section className="py-24 px-6 bg-accent/20">
+      <section id="about" className="py-24 px-6 bg-accent/20 scroll-mt-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Side */}
           <motion.div
@@ -496,43 +416,6 @@ export function HomeClient() {
         </div>
       </section>
 
-      {/* Progress Bar Section */}
-      <section className="py-24 px-6 bg-accent/30">
-        <motion.div
-          className="max-w-3xl mx-auto text-center space-y-8"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={staggerContainer}
-        >
-          <motion.h2
-            className="text-4xl md:text-5xl"
-            variants={staggerItem}
-          >
-            Help us meet our goal!
-          </motion.h2>
-          <motion.p
-            className="text-lg text-muted-foreground"
-            variants={staggerItem}
-          >
-            Help us make this festival possible! Your donation supports the artists, people, and resources behind the event while helping us give back to environmental organizations making a positive impact.
-          </motion.p>
-
-          {/* GiveButter Donation Button */}
-          <motion.div
-            variants={staggerItem}
-            className="flex flex-col sm:flex-row items-center gap-4 max-w-4xl mx-auto"
-          >
-            <div className="flex-1 w-full sm:w-auto">
-              <givebutter-widget id="paK7zL"></givebutter-widget>
-            </div>
-            <div className="flex-shrink-0">
-              <givebutter-widget id="pda12j"></givebutter-widget>
-            </div>
-          </motion.div>
-        </motion.div>
-      </section>
-
       {/* Newsletter Signup Section */}
       <section className="py-24 px-6 bg-muted/30">
         <motion.div
@@ -543,7 +426,7 @@ export function HomeClient() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-5xl md:text-6xl mb-6"
+            className="font-display text-5xl md:text-6xl mb-6"
             variants={staggerItem}
           >
             Stay in the Loop
@@ -569,7 +452,7 @@ export function HomeClient() {
       {/* Stats Section - No animations as requested */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl text-center mb-16">
+          <h2 className="font-display text-4xl md:text-5xl text-center mb-16">
             SWWA 2023
           </h2>
 
@@ -626,7 +509,7 @@ export function HomeClient() {
       <SponsorsCarousel />
 
       {/* Location Section with Google Maps - No animations as requested */}
-      <section className="py-24 px-6" id="location">
+      <section className="py-24 px-6 scroll-mt-16" id="location">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl mb-4">
@@ -739,7 +622,7 @@ export function HomeClient() {
               variants={fadeUp}
             >
               <motion.div whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400 }}>
-                <Button size="lg" className="px-8 text-lg bg-white text-black hover:bg-white/90 hover:scale-105 transition-transform" asChild>
+                <Button size="lg" className="px-8 text-lg hover:scale-105 transition-transform" asChild>
                   <a href="https://www.instagram.com/startwherewearefestival/" target="_blank" rel="noopener noreferrer">
                     Follow Us on Instagram
                   </a>

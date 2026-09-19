@@ -36,10 +36,23 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-surface-dark: var(--surface-dark);
+  --color-festival-pink: var(--festival-pink);
+  --color-festival-mint: var(--festival-mint);
+  --color-festival-sky: var(--festival-sky);
+  --color-festival-blush: var(--festival-blush);
+  --color-festival-peach: var(--festival-peach);
+  --color-festival-ink: var(--festival-ink);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Typekit kit ten4gig: aktiv-grotesk (400/500), aktiv-grotesk-condensed (900), virna (400) */
+@theme {
+  --font-sans: "aktiv-grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-condensed: "aktiv-grotesk-condensed", "Arial Narrow", Impact, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "virna", "aktiv-grotesk-condensed", Impact, sans-serif;
 }
 
 /* Bump the smaller text sizes site-wide (one step up from Tailwind defaults). Headings are untouched. */
@@ -58,98 +71,86 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.98 0.015 85);
-  --foreground: oklch(0.25 0.04 75);
-  /* Dark section background: one shade lighter than --foreground (theme "black") */
-  --surface-dark: oklch(0.3 0.04 75);
-  --card: oklch(0.96 0.02 85);
-  --card-foreground: oklch(0.25 0.04 75);
-  --popover: oklch(0.96 0.02 85);
-  --popover-foreground: oklch(0.25 0.04 75);
-  --primary: oklch(0.45 0.12 55);
-  --primary-foreground: oklch(0.98 0.01 85);
-  --secondary: oklch(0.75 0.08 70);
-  --secondary-foreground: oklch(0.25 0.04 75);
-  --muted: oklch(0.85 0.03 80);
-  --muted-foreground: oklch(0.45 0.03 70);
-  --accent: oklch(0.65 0.15 45);
-  --accent-foreground: oklch(0.98 0.01 85);
-  --destructive: oklch(0.55 0.16 35);
-  --border: oklch(0.8 0.04 75);
-  --input: oklch(0.8 0.04 75);
-  --ring: oklch(0.55 0.1 60);
-  --chart-1: oklch(0.65 0.15 45);
-  --chart-2: oklch(0.55 0.12 55);
-  --chart-3: oklch(0.75 0.08 70);
-  --chart-4: oklch(0.6 0.1 40);
-  --chart-5: oklch(0.7 0.09 65);
-  --sidebar: oklch(0.96 0.02 85);
-  --sidebar-foreground: oklch(0.25 0.04 75);
-  --sidebar-primary: oklch(0.45 0.12 55);
-  --sidebar-primary-foreground: oklch(0.98 0.01 85);
-  --sidebar-accent: oklch(0.85 0.03 80);
-  --sidebar-accent-foreground: oklch(0.25 0.04 75);
-  --sidebar-border: oklch(0.8 0.04 75);
-  --sidebar-ring: oklch(0.55 0.1 60);
+
+  /* Brand colors sampled from the 2026 hero artwork (hero01.jpg) */
+  --festival-pink: #ef0890;
+  --festival-mint: #00f7e1;
+  --festival-sky: #25dcff;
+  --festival-blush: #f5bcd2;
+  --festival-peach: #f6d1ac;
+  --festival-ink: #3b3d3c;
+
+  --background: #fffafc;
+  --foreground: var(--festival-ink);
+  /* Dark section background (charcoal) */
+  --surface-dark: #2c2e30;
+  --card: #ffffff;
+  --card-foreground: var(--festival-ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--festival-ink);
+  --primary: var(--festival-pink);
+  --primary-foreground: #ffffff;
+  --secondary: var(--festival-sky);
+  --secondary-foreground: var(--festival-ink);
+  --muted: #cfeefc;
+  --muted-foreground: #5e6168;
+  --accent: var(--festival-blush);
+  --accent-foreground: var(--festival-ink);
+  --destructive: #d3264f;
+  --border: #f1d7e4;
+  --input: #f1d7e4;
+  --ring: var(--festival-pink);
+  --chart-1: var(--festival-pink);
+  --chart-2: var(--festival-sky);
+  --chart-3: var(--festival-mint);
+  --chart-4: var(--festival-peach);
+  --chart-5: var(--festival-blush);
+  --sidebar: #ffffff;
+  --sidebar-foreground: var(--festival-ink);
+  --sidebar-primary: var(--festival-pink);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--festival-blush);
+  --sidebar-accent-foreground: var(--festival-ink);
+  --sidebar-border: #f1d7e4;
+  --sidebar-ring: var(--festival-pink);
 }
 
 .dark {
-  --background: oklch(0.18 0.02 75);
-  --foreground: oklch(0.92 0.015 85);
-  --surface-dark: oklch(0.14 0.02 75);
-  --card: oklch(0.22 0.025 75);
-  --card-foreground: oklch(0.92 0.015 85);
-  --popover: oklch(0.22 0.025 75);
-  --popover-foreground: oklch(0.92 0.015 85);
-  --primary: oklch(0.65 0.12 55);
-  --primary-foreground: oklch(0.15 0.02 75);
-  --secondary: oklch(0.45 0.08 65);
-  --secondary-foreground: oklch(0.92 0.015 85);
-  --muted: oklch(0.3 0.03 70);
-  --muted-foreground: oklch(0.65 0.03 80);
-  --accent: oklch(0.55 0.15 45);
-  --accent-foreground: oklch(0.92 0.015 85);
-  --destructive: oklch(0.5 0.18 25);
-  --border: oklch(0.35 0.03 70);
-  --input: oklch(0.35 0.03 70);
-  --ring: oklch(0.6 0.1 60);
-  --chart-1: oklch(0.55 0.15 45);
-  --chart-2: oklch(0.65 0.12 55);
-  --chart-3: oklch(0.45 0.08 65);
-  --chart-4: oklch(0.5 0.1 40);
-  --chart-5: oklch(0.6 0.09 60);
-  --sidebar: oklch(0.22 0.025 75);
-  --sidebar-foreground: oklch(0.92 0.015 85);
-  --sidebar-primary: oklch(0.65 0.12 55);
-  --sidebar-primary-foreground: oklch(0.15 0.02 75);
-  --sidebar-accent: oklch(0.3 0.03 70);
-  --sidebar-accent-foreground: oklch(0.92 0.015 85);
-  --sidebar-border: oklch(0.35 0.03 70);
-  --sidebar-ring: oklch(0.6 0.1 60);
-}
-
-/* Custom Font Declaration */
-@font-face {
-  font-family: 'Brugty';
-  src: url('/fonts/brugty/Brugty DEMO.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+  --background: #1f2023;
+  --foreground: #f4f1f3;
+  --surface-dark: #151618;
+  --card: #26282b;
+  --card-foreground: #f4f1f3;
+  --popover: #26282b;
+  --popover-foreground: #f4f1f3;
+  --primary: var(--festival-pink);
+  --primary-foreground: #ffffff;
+  --secondary: var(--festival-sky);
+  --secondary-foreground: #1f2023;
+  --muted: #33363a;
+  --muted-foreground: #b5b3b8;
+  --accent: #5a2b45;
+  --accent-foreground: #f4f1f3;
+  --destructive: #e2415f;
+  --border: #3a3c40;
+  --input: #3a3c40;
+  --ring: var(--festival-pink);
+  --chart-1: var(--festival-pink);
+  --chart-2: var(--festival-sky);
+  --chart-3: var(--festival-mint);
+  --chart-4: var(--festival-peach);
+  --chart-5: var(--festival-blush);
+  --sidebar: #26282b;
+  --sidebar-foreground: #f4f1f3;
+  --sidebar-primary: var(--festival-pink);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #33363a;
+  --sidebar-accent-foreground: #f4f1f3;
+  --sidebar-border: #3a3c40;
+  --sidebar-ring: var(--festival-pink);
 }
 
 @layer base {
-  :root {
-    /* CUSTOM FONT TOGGLE - To revert, comment the active lines and uncomment the disabled lines */
-
-    /* Active: Brugty font with weight 400 */
-    --heading-font: 'Brugty', serif;
-    --heading-weight: 400;
-
-    /* Disabled: Default font with bold weight (uncomment these and comment above to revert) */
-    /* --heading-font: inherit; */
-    /* --heading-weight: 700; */
-  }
-
   * {
     @apply border-border outline-ring/50;
   }
@@ -157,13 +158,24 @@
     @apply bg-background text-foreground;
     font-size: var(--text-base);
     line-height: var(--text-base--line-height);
-    font-family: "mrs-eaves", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-family: var(--font-sans);
   }
 
-  /* Apply custom font to all headers using CSS variable */
+  /* Headings use the heavy condensed grotesk, uppercase, like the hero details.
+     Virna (the striped display face from the wordmark) is reserved for a few short,
+     major titles via the `font-display` utility - use it sparingly, it's hard to read at length. */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--heading-font);
-    font-weight: var(--heading-weight);
+    font-family: var(--font-condensed);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  h1, h2 {
     letter-spacing: 0.02em;
+    line-height: 1.05;
+  }
+  h1.font-display, h2.font-display {
+    font-weight: 400;
+    text-transform: none;
   }
 }

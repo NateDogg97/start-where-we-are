@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -12,6 +13,19 @@ import {
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // On the home page the nav floats transparently over the hero artwork (see mock01.jpg).
+  // Once the user scrolls, or on any other page, it becomes a solid pink bar with the logo.
+  const isFloating = pathname === '/' && !isScrolled;
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     // Prevent body scroll when mobile menu is open
@@ -26,26 +40,38 @@ export function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  const navItems = [
-    { href: '/#lineup', label: 'Lineup' },
-    { href: 'https://www.eventbrite.com/e/start-where-we-are-earth-music-festival-2026-tickets-1998927218119?aff=oddtdtcreator', label: 'Tickets' },
-    { href: '#location', label: 'Location' },
-    { href: '/press', label: 'Press' },
-    { href: 'https://givebutter.com/swwafestival', label: 'Donate', external: true },
+  const navItems: { href: string; label: string; external?: boolean }[] = [
+    { href: '/#lineup', label: 'Artist Lineup' },
+    { href: '/#about', label: 'About Us' },
+    { href: '/#location', label: 'Festival Location' },
   ];
 
   return (
     <>
-      <header className="fixed top-0 z-50 w-full px-6 py-4 border-b border-primary-foreground/10 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/75 text-primary-foreground">
-        <nav className="max-w-7xl mx-auto flex items-center justify-between">
+      <header
+        className={`fixed top-0 z-50 w-full px-6 py-4 text-primary-foreground transition-colors duration-300 ${
+          isFloating
+            ? 'bg-transparent border-b border-transparent'
+            : 'border-b border-primary-foreground/10 bg-primary/95 backdrop-blur supports-[backdrop-filter]:bg-primary/90'
+        }`}
+      >
+        <nav className="max-w-7xl mx-auto flex items-center justify-between min-h-11">
+          {/* The main logo lives in the hero; the small nav logo only appears once the bar is solid */}
           <div className="flex items-center gap-3">
-            <Link href="/" className="hover:opacity-80 transition-opacity">
+            <Link
+              href="/"
+              className={`transition-opacity duration-300 hover:opacity-80 ${
+                isFloating ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
+              aria-hidden={isFloating}
+              tabIndex={isFloating ? -1 : undefined}
+            >
               <Image
-                src="/2026-swwa-logo.png"
+                src="/logo.png"
                 alt="Start Where We Are Festival Logo"
                 width={150}
                 height={40}
-                className="object-contain transition-all duration-300"
+                className="object-contain"
               />
             </Link>
           </div>
@@ -58,7 +84,7 @@ export function Header() {
                   <NavigationMenuLink 
                     href={item.href} 
                     target={item.external ? "_blank" : undefined}
-                    className="px-4 py-2 text-lg text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground rounded-md transition-colors"
+                    className="px-4 py-2 font-condensed font-black uppercase tracking-wide text-lg text-primary-foreground drop-shadow-sm hover:bg-primary-foreground/15 hover:text-primary-foreground rounded-md transition-colors"
                   >
                     {item.label}
                   </NavigationMenuLink>
@@ -118,7 +144,7 @@ export function Header() {
                 href={item.href}
                 target={item.external ? "_blank" : undefined}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-lg hover:bg-accent rounded-md transition-colors"
+                className="px-4 py-3 font-condensed font-black uppercase tracking-wide text-lg hover:bg-accent rounded-md transition-colors"
               >
                 {item.label}
               </a>
